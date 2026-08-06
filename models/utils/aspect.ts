@@ -1,7 +1,13 @@
+// models/utils/aspect.ts
 // Aspects represent the different types of damage and resistance in the game.
+
+
 export interface Aspect {
-    slashing: number;
-    piercing: number;
-    bludgeoning: number;
+    slash: number;
+    pierce: number;
+    bludgeon: number;
+
     arcane: number;
+
+    pure: number;
 }

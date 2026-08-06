@@ -1,3 +1,4 @@
+// models/utils/attributesConstellation.ts
 
 
 export const DEFAULT_ATTRIBUTES_CONSTELLATION = {
@@ -39,5 +40,4 @@ export const DEFAULT_ATTRIBUTES_CONSTELLATION = {
     empathy: 0 as number, // PERCEPTION
 
 }
-
 export type AttributesConstellation = typeof DEFAULT_ATTRIBUTES_CONSTELLATION;

@@ -1,3 +1,6 @@
+// models/character.ts
+
+
 import { Entry } from "./entry";
 import { AbilitiesGrimmoire } from "./utils/abilitiesGrimmoire";
 import { Effect, EffectIdentifier } from "./utils/effect";
@@ -5,17 +8,17 @@ import { Modifier } from "./utils/modifier";
 import { AttributesConstellation, DEFAULT_ATTRIBUTES_CONSTELLATION } from "./utils/attributesConstellation";
 import { ItemsInventory } from "./utils/itemsInventory";
 import { DEFAULT_STATS_CONDITION, Stat, StatsCondition } from "./utils/statsCondition";
-import { Wearable } from "./item";
-import { SkillsScroll } from "./utils/skill";
+import { Equipable } from "./item";
+import { SkillsScroll } from "./utils/skillsScroll";
 
 
 export class Character extends Entry {
     
-    public inventory: ItemsInventory;
-    public grimmoire: AbilitiesGrimmoire;
+    public inventory: ItemsInventory; // Equipment and storage for items.
+    public grimmoire: AbilitiesGrimmoire; // Equipment for abilities.
     public constellation: AttributesConstellation;
-    public scroll: SkillsScroll;
-    public condition: StatsCondition;
+    public scroll: SkillsScroll; 
+    public condition: StatsCondition; 
     public traits: Array<Modifier>;
 
     constructor(source?: Partial<Character>) {
@@ -28,7 +31,6 @@ export class Character extends Entry {
         this.scroll = source?.scroll ? new SkillsScroll(source.scroll) : new SkillsScroll();
         this.condition = source?.condition ?? {...DEFAULT_STATS_CONDITION};
         this.traits = source?.traits ? [...source.traits] : new Array();
-        
     }
 
     searchEffect(source: Array<Modifier> | null | undefined, identifier: EffectIdentifier, baseAccumulation: {adder:number,multiplier:number,setter:number|null}): {adder:number,multiplier:number,setter:number|null} {
@@ -47,6 +49,7 @@ export class Character extends Entry {
         })
         return accumulation;
     }
+    // Search all effects of the same identifier through equipment and character traits and accumulate all values.
     accumulateEffect(identifier: EffectIdentifier, baseValue: number = 0): number {
 
         let accumulation = {
@@ -59,7 +62,7 @@ export class Character extends Entry {
 
         const eq = this.inventory.equipment;
         for (const slot of [ eq.apparel, eq.leftHand, eq.rightHand, eq.accessory1, eq.accessory2, eq.container ]) {
-            if (slot?.reference instanceof Wearable) accumulation = this.searchEffect(slot.reference.traits, identifier, accumulation);
+            if (slot?.reference instanceof Equipable) accumulation = this.searchEffect(slot.reference.traits, identifier, accumulation);
             accumulation = this.searchEffect(slot?.quirks, identifier, accumulation);
         }
 

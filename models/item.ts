@@ -1,3 +1,6 @@
+// models/item.ts
+
+
 import { Entry } from "./entry";
 import { Aspect } from "./utils/aspect";
 import { Composition } from "./utils/composition";
@@ -28,11 +31,12 @@ export class Item extends Entry {
     }
 }
 
-export class Wearable extends Item {
+// Only items can be equipped.
+export class Equipable extends Item {
 
     public traits: Array<Modifier>;
 
-    constructor(source?: Partial<Wearable>) {
+    constructor(source?: Partial<Equipable>) {
         super(source);
         this.traits = source?.traits ? [...source.traits] : new Array();
         this.stack = 1;
@@ -40,7 +44,8 @@ export class Wearable extends Item {
 
 }
 
-export class Breakable extends Wearable {
+// Only equipable items can break.
+export class Breakable extends Equipable {
 
     public compositions: Array<Composition>;
     public durability: number | null;
@@ -53,7 +58,7 @@ export class Breakable extends Wearable {
 
 }
 
-
+// Weapons can break and be equipped.
 export class Weapon extends Breakable {
 
     public damage: Partial<Aspect>;
@@ -68,6 +73,7 @@ export class Weapon extends Breakable {
 
 }
 
+// Tools can break and be equipped.
 export class Tool extends Breakable {
 
     public efficiency: number;
@@ -81,6 +87,7 @@ export class Tool extends Breakable {
 
 }
 
+// Apparels can break and be equipped.
 export class Apparel extends Breakable {
 
     public resistance: Partial<Aspect>; 
@@ -94,9 +101,11 @@ export class Apparel extends Breakable {
         this.protection = source?.protection ?? {}; // Protection N reduces incoming damage of that type by N. 
         this.weight = source?.weight ?? 0; 
     }
+
 }
 
-export class Accessory extends Wearable { 
+// Accessories be equipped, but cannot break.
+export class Accessory extends Equipable { 
 
     constructor(source?: Partial<Accessory>) {
         super(source);
@@ -105,7 +114,8 @@ export class Accessory extends Wearable {
 
 }
 
-export class Container extends Wearable {
+// Containers be equipped, but cannot break.
+export class Container extends Equipable {
 
     public size: number;
 
@@ -117,6 +127,7 @@ export class Container extends Wearable {
 
 }
 
+// Consumables cannot breake and cannot be equipped.
 export class Consumable extends Item {
 
     public efficiency: number;
@@ -129,6 +140,7 @@ export class Consumable extends Item {
 
 }
 
+// Materials cannot breake and cannot be equipped.
 export class Material extends Item {
 
     constructor(source?: Partial<Item>) {
@@ -138,6 +150,7 @@ export class Material extends Item {
 
 }
 
+// Artifacts cannot breake and cannot be equipped.
 export class Artifact extends Item {
     constructor(source?: Partial<Item>) {
         super(source);

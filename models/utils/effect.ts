@@ -1,3 +1,7 @@
+// models/utils/effect.ts
+// Can be either quirks (for instances) or traits (for entries).
+
+
 export type EffectMode = 'ADDER' | 'MULTIPLIER' | 'SETTER';
 export interface Effect {
     identifier: EffectIdentifier;

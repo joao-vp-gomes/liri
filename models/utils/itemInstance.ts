@@ -1,3 +1,7 @@
+// models/utils/itemInstance.ts
+// "Itemization" of an item.
+
+
 import { Breakable, Container, Item } from "../item";
 import { Modifier } from "./modifier";
 import { FiniteStorage } from "./storage";

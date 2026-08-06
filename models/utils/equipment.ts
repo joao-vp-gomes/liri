@@ -1,3 +1,6 @@
+// models/utils/equipment.ts
+
+
 import { ItemInstance } from "./itemInstance";
 
 

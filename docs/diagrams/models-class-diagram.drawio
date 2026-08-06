@@ -1,6 +1,6 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6">
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36">
   <diagram name="Page-1" id="f0V-_zX0BxMYrZCeKKjt">
-    <mxGraphModel dx="2177" dy="1603" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="924" dy="687" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -249,7 +249,7 @@
         <mxCell id="gYrbDT5XspLZIAFHEOHv-68" parent="gYrbDT5XspLZIAFHEOHv-67" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ skill: SkillIdentifier" vertex="1">
           <mxGeometry height="26" width="200" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="gYrbDT5XspLZIAFHEOHv-69" parent="gYrbDT5XspLZIAFHEOHv-67" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ requiredLevel: number" vertex="1">
+        <mxCell id="gYrbDT5XspLZIAFHEOHv-69" parent="gYrbDT5XspLZIAFHEOHv-67" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ requiredExp: number" vertex="1">
           <mxGeometry height="26" width="200" y="66" as="geometry" />
         </mxCell>
         <mxCell id="gYrbDT5XspLZIAFHEOHv-70" parent="gYrbDT5XspLZIAFHEOHv-67" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ experienceContribution: number" vertex="1">
@@ -315,7 +315,7 @@
           <mxGeometry height="28" width="200" y="92" as="geometry" />
         </mxCell>
         <mxCell id="gYrbDT5XspLZIAFHEOHv-90" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;br&gt;&lt;div&gt;Skill&lt;/div&gt;" vertex="1">
-          <mxGeometry height="120" width="200" x="1840" y="662" as="geometry">
+          <mxGeometry height="94" width="200" x="1840" y="662" as="geometry">
             <mxRectangle height="40" width="200" x="280" y="720" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -324,9 +324,6 @@
         </mxCell>
         <mxCell id="gYrbDT5XspLZIAFHEOHv-91" parent="gYrbDT5XspLZIAFHEOHv-90" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ identifier: SkillIdentifier" vertex="1">
           <mxGeometry height="26" width="200" y="68" as="geometry" />
-        </mxCell>
-        <mxCell id="gYrbDT5XspLZIAFHEOHv-92" parent="gYrbDT5XspLZIAFHEOHv-90" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ currentLevel: number" vertex="1">
-          <mxGeometry height="26" width="200" y="94" as="geometry" />
         </mxCell>
         <mxCell id="gYrbDT5XspLZIAFHEOHv-94" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;br&gt;Ingredient" vertex="1">
           <mxGeometry height="100" width="200" x="1840" y="260" as="geometry">

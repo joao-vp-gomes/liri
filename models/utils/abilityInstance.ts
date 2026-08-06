@@ -1,3 +1,7 @@
+// models/utils/abilityInstance.ts
+// "Itemization" of an ability.
+
+
 import { Ability } from "../ability";
 
 

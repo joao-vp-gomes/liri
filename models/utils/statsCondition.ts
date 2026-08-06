@@ -1,3 +1,6 @@
+// models/utils/statsCondition.ts
+
+
 export const DEFAULT_STATS_CONDITION = {
     health: 0 as number,
     energy: 0 as number,

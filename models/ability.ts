@@ -1,5 +1,5 @@
-// ability.ts
-// Abilities are actions that can be performed.
+// models/ability.ts
+
 
 import { Entry } from "./entry";
 import { Competence } from "./utils/competence";
@@ -11,7 +11,6 @@ export class Ability extends Entry {
     public cooldown: number; 
     // Time in turns. 0 means instantaneos, -1 means infinite.
     public duration: number; 
-    
 
     public startCost: Partial<StatsCondition> | null;
     public durationCost: Partial<StatsCondition> | null;

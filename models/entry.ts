@@ -1,3 +1,6 @@
+// models/entry.ts
+
+
 import { generateKey } from "./utils/key";
 
 

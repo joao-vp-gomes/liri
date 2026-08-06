@@ -1,3 +1,6 @@
+// models/utils/abilitiesGrimmoire.ts
+
+
 import { AbilityInstance } from './abilityInstance'
 
 

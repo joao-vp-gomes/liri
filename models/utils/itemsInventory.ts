@@ -1,3 +1,6 @@
+// models/utils/itemsInventory.ts
+
+
 import { ItemInstance } from "./itemInstance";
 import { Equipment } from "./equipment";
 import { FiniteStorage, InfiniteStorage } from "./storage";
