@@ -22,7 +22,7 @@ export const DEFAULT_ATTRIBUTES_CONSTELLATION = {
 
     sagePath: 0 as number,
     // Attributes of the path of the sage:
-    pharmacy: 0 as number,
+    brewing: 0 as number,
     engineering: 0 as number,
     erudition: 0 as number,
     intellect: 0 as number, // STAT

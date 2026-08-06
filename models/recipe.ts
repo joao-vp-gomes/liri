@@ -1,14 +1,18 @@
+
+
 import { ItemInstance } from "./utils/itemInstance";
 import { Entry } from "./entry";
 import { Ingredient } from "./utils/ingredient";
+import { Competence } from "./utils/competence";
 
 
 export type RecipeKind = 'CRAFTING' | 'SMITHING' | 'ALCHEMY' | 'ENCHANTING' | 'COOKING';
 export class Recipe extends Entry {
     
-    public kind: RecipeKind;
+    public kind: RecipeKind; // Only for indexing.
     public ingredients: Array<Ingredient>;
-    //public competence: Competence | null;
+    // Certain recipes require certain competences to be performed.
+    public competence: Competence | null;
     public product: ItemInstance | null;
 
     constructor(source?: Partial<Recipe>) {
@@ -17,7 +21,7 @@ export class Recipe extends Entry {
 
         this.kind = source?.kind ?? 'CRAFTING';
         this.ingredients = source?.ingredients ? [...source.ingredients] : new Array();
-        //this.competence = source?.competence ?? null;
+        this.competence = source?.competence ?? null;
         this.product = source?.product ?? null;
     }
 

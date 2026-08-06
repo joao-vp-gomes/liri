@@ -6,6 +6,7 @@ import { AttributesConstellation, DEFAULT_ATTRIBUTES_CONSTELLATION } from "./uti
 import { ItemsInventory } from "./utils/itemsInventory";
 import { DEFAULT_STATS_CONDITION, Stat, StatsCondition } from "./utils/statsCondition";
 import { Wearable } from "./item";
+import { SkillsScroll } from "./utils/skill";
 
 
 export class Character extends Entry {
@@ -13,7 +14,7 @@ export class Character extends Entry {
     public inventory: ItemsInventory;
     public grimmoire: AbilitiesGrimmoire;
     public constellation: AttributesConstellation;
-    //public scroll: SkillsScroll;
+    public scroll: SkillsScroll;
     public condition: StatsCondition;
     public traits: Array<Modifier>;
 
@@ -24,7 +25,7 @@ export class Character extends Entry {
         this.inventory = source?.inventory ? new ItemsInventory(source.inventory) : new ItemsInventory();
         this.grimmoire = source?.grimmoire ? new AbilitiesGrimmoire(source.grimmoire) : new AbilitiesGrimmoire();
         this.constellation = source?.constellation ?? {...DEFAULT_ATTRIBUTES_CONSTELLATION};
-        //this.scroll = source?.scroll ? new SkillsScroll(source.scroll) : new SkillsScroll();
+        this.scroll = source?.scroll ? new SkillsScroll(source.scroll) : new SkillsScroll();
         this.condition = source?.condition ?? {...DEFAULT_STATS_CONDITION};
         this.traits = source?.traits ? [...source.traits] : new Array();
         
@@ -57,7 +58,7 @@ export class Character extends Entry {
         accumulation = this.searchEffect(this.traits, identifier, accumulation);
 
         const eq = this.inventory.equipment;
-        for (const slot of [ eq.apparel, eq.leftHand, eq.rightHand, eq.accessory1, eq.accessory2 ]) {
+        for (const slot of [ eq.apparel, eq.leftHand, eq.rightHand, eq.accessory1, eq.accessory2, eq.container ]) {
             if (slot?.reference instanceof Wearable) accumulation = this.searchEffect(slot.reference.traits, identifier, accumulation);
             accumulation = this.searchEffect(slot?.quirks, identifier, accumulation);
         }
@@ -87,7 +88,7 @@ export class Character extends Entry {
                 variable += this.accumulateEffect('SAGE_PATH', attCons.sagePath);
                 variable += this.accumulateEffect('INTELLECT', attCons.intellect);
                 break;
-            case 'ANIMO': 
+            case 'ANIMA': 
                 baseValue = 4; rate = 2;
                 variable += this.accumulateEffect('POET_PATH', attCons.poetPath);
                 variable += this.accumulateEffect('CHARISMA', attCons.charisma);
@@ -103,7 +104,7 @@ export class Character extends Entry {
             case 'HEALTH': this.condition.health = valueToSet; return;
             case 'ENERGY': this.condition.energy = valueToSet; return;
             case 'FOCUS': this.condition.focus = valueToSet; return;
-            case 'ANIMO': this.condition.animo = valueToSet; return;
+            case 'ANIMA': this.condition.anima = valueToSet; return;
         }
     }
 

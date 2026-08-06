@@ -22,8 +22,8 @@ export class ItemInstance {
             this.reference = source.reference;
             this.currentStack = source.currentStack;
             this.currentDurability = source.currentDurability;
-            this.quirks = source.quirks;
-            this.storage = source.storage;
+            this.quirks = [...source.quirks];
+            this.storage = source.storage ? new FiniteStorage(source.storage) : null;
         }
     }
 

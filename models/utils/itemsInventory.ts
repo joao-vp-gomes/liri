@@ -101,6 +101,8 @@ export class ItemsInventory {
         if (excedent) container.addToSlot(excedent, slot);
     }
     equipmentToContainer(equipmentSlot: keyof typeof Equipment.EQUIPMENT_SLOTS): void {
+        if (equipmentSlot === 'CONTAINER') return; // Prevent a container from being placed inside itself.
+
         const containerSlot = this.equipment.container;
         if (containerSlot === null) return;
         const container = containerSlot.storage;
