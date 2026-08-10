@@ -4,21 +4,25 @@
 import { ItemInstance } from "./itemInstance";
 import { Equipment } from "./equipment";
 import { FiniteStorage, InfiniteStorage } from "./storage";
+import type { Ingredient } from "./ingredient";
 
+
+const POCKET_SIZE = 12;
 
 export class ItemsInventory {
 
     public pocket: FiniteStorage;
     public vault: InfiniteStorage;
     public equipment: Equipment;
+    public workbench: InfiniteStorage;
 
     constructor(source?: ItemsInventory) {
-        this.pocket = source?.pocket ? new FiniteStorage(source.pocket) : new FiniteStorage(undefined, 10);
+        this.pocket = new FiniteStorage(source?.pocket, POCKET_SIZE);
         this.vault = source?.vault ? new InfiniteStorage(source.vault) : new InfiniteStorage();
         this.equipment = source?.equipment ? new Equipment(source.equipment) : new Equipment();
+        this.workbench = source?.workbench ? new InfiniteStorage(source.workbench) : new InfiniteStorage();
     }
 
-    // If a specific slot is given, forces placement there and cascades overflow to bag then vault.
     environmentToPocket(itemToAdd: ItemInstance, slot?: number): void {
         if (slot !== undefined) {
             let excedent = this.pocket.addToSlot(itemToAdd, slot, true);
@@ -116,6 +120,31 @@ export class ItemsInventory {
     }
     equipmentToEnvironment(equipmentSlot: keyof typeof Equipment.EQUIPMENT_SLOTS): void {
         this.equipment.clearEquipment(equipmentSlot);
+    }
+
+    pocketToWorkbench(slot: number, quantity: number): void {
+        this.workbench.add(this.pocket.removeBySlot(slot, quantity));
+    }
+    workbenchToPocket(index: number, quantity: number): void {
+        const excedent = this.pocket.add(this.workbench.removeByIndex(index, quantity));
+        if (excedent) this.workbench.add(excedent);
+    }
+    containerToWorkbench(slot: number, quantity: number): void {
+        const containerSlot = this.equipment.container;
+        if (containerSlot === null) return;
+        const container = containerSlot.storage;
+        if (container === null) return;
+
+        this.workbench.add(container.removeBySlot(slot, quantity));
+    }
+
+    craft(ingredients: Array<Ingredient>, products: Array<ItemInstance>): void {
+        for (const ingredient of ingredients) {
+            this.workbench.removeByKey(ingredient.referenceKey, ingredient.quantity);
+        }
+        for (const product of products) {
+            this.environmentToPocket(new ItemInstance(product));
+        }
     }
 
     containerToPocket(fromSlot: number, toSlot: number): void {

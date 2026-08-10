@@ -2,6 +2,7 @@
 
 
 import { ItemInstance } from "./itemInstance";
+import { FiniteStorage } from "./storage";
 
 
 export class Equipment {
@@ -28,7 +29,9 @@ export class Equipment {
         this.leftHand = source?.leftHand ? {...source.leftHand} : null;
         this.accessory1 = source?.accessory1 ? {...source.accessory1} : null;
         this.accessory2 = source?.accessory2 ? {...source.accessory2} : null;
-        this.container = source?.container ? {...source.container} : null;
+        this.container = source?.container
+            ? { ...source.container, storage: source.container.storage ? new FiniteStorage(source.container.storage) : null }
+            : null;
     }
 
     setEquipment(slot: keyof typeof Equipment.EQUIPMENT_SLOTS, itemInstance: ItemInstance | null): ItemInstance | null {

@@ -21,32 +21,13 @@ export class Skill {
 
 }
 
-export type SkillIdentifier = (
-    | 'BONE_TREATMENT'
-    | 'BLOOD_TREATMENT'
-    | 'NERVES_TREATMENT'
+export const SKILL_IDENTIFIER_SUGGESTIONS = [
+    'BONE_TREATMENT', 'BLOOD_TREATMENT', 'NERVES_TREATMENT',
+    'PYROTECHNICS_ALCHEMY', 'ELIXIRS_ALCHEMY', 'OILS_ALCHEMY',
+    'SMITH_CRAFT', 'ENGINEER_CRAFT', 'TINKER_CRAFT',
+    'COMEDY_ART', 'TRAGEDY_ART', 'EPIC_ART', 'LYRIC_ART',
+    'HAMMER_BRAWL', 'FIST_BRAWL', 'ROD_BRAWL', 'AXE_BRAWL', 'SWORD_BRAWL',
+    'HALBERD_BRAWL', 'SPEAR_BRAWL', 'DAGGER_BRAWL', 'BOW_BRAWL',
+] as const;
 
-    | 'PYROTECHNICS_ALCHEMY'
-    | 'ELIXIRS_ALCHEMY'
-    | 'OILS_ALCHEMY'
-
-    | 'SMITH_CRAFT'
-    | 'ENGINEER_CRAFT'
-    | 'TINKER_CRAFT'
-
-    | 'COMEDY_ART'
-    | 'TRAGEDY_ART' 
-    | 'EPIC_ART'
-    | 'LYRIC_ART'
-
-    | 'HAMMER_BRAWL' 
-    | 'FIST_BRAWL'
-    | 'ROD_BRAWL'
-    | 'AXE_BRAWL'
-    | 'SWORD_BRAWL' 
-    | 'HALBERD_BRAWL'
-    | 'SPEAR_BRAWL'
-    | 'DAGGER_BRAWL' 
-    | 'BOW_BRAWL'
-    | (string & {})
-);
+export type SkillIdentifier = typeof SKILL_IDENTIFIER_SUGGESTIONS[number] | (string & {});

@@ -1,0 +1,385 @@
+/* frontend/src/pages/CodexPage/entryWindows/Inventory/Inventory.module.css */
+
+
+.inventoryMain {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+
+.pocketVaultRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 28px;
+}
+
+
+.equipmentContainerRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 28px;
+}
+
+
+.slotRows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.slotRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding: 4px 4px 10px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--fill-color-very-light) transparent;
+}
+
+
+.slotWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 64px;
+    flex-shrink: 0;
+}
+
+.slotCell {
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--fill-color-light);
+    background: var(--fill-color-regular);
+    overflow: hidden;
+    transition: border-color 0.15s;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+.slotWrapper:hover .slotCell {
+    border-color: var(--accent-color);
+}
+
+.slotCellDragOver {
+    border-color: var(--accent-color) !important;
+    box-shadow: inset 0 0 0 2px var(--accent-color);
+}
+
+.slotImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slotTopLabel {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stroke-color-low);
+    text-align: center;
+    width: 64px;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+    height: 2.6em;
+    overflow: hidden;
+}
+
+.slotName {
+    font-family: 'Crimson Text', serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--stroke-color-regular);
+    text-align: center;
+    width: 64px;
+    line-height: 1.3;
+    height: 2.6em;
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+
+.searchAnchor {
+    position: fixed;
+    z-index: 260;
+}
+
+
+.slotExpandPanel {
+    position: fixed;
+    z-index: 250;
+    background: var(--fill-color-regular);
+    border: 1px solid var(--fill-color-light);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    padding: 12px 14px;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.slotExpandName {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--stroke-color-high);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--fill-color-light);
+}
+
+.slotExpandField {
+    align-self: flex-start;
+}
+
+.slotExpandQuirksLabel {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--stroke-color-low);
+    margin-bottom: 6px;
+}
+
+.slotExpandQuirksEmpty {
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--stroke-color-low);
+}
+
+
+.contextMenu {
+    position: fixed;
+    z-index: 300;
+    background: var(--fill-color-regular);
+    border: 1px solid var(--fill-color-light);
+    min-width: 170px;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.contextMenuOption {
+    text-align: left;
+    padding: 7px 10px;
+    border: none;
+    background: transparent;
+    color: var(--stroke-color-regular);
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+}
+.contextMenuOption:hover { background: var(--fill-color-lighter); color: var(--stroke-color-high); }
+
+.contextMenuOptionDanger { color: var(--red-color-light); }
+.contextMenuOptionDanger:hover { background: var(--red-color-regular); color: white; }
+
+.menuQuantityRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 6px 10px 8px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--fill-color-light);
+}
+.menuQuantityRow button {
+    background: none;
+    border: none;
+    color: var(--stroke-color-regular);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 18px;
+    transition: color 0.1s;
+}
+.menuQuantityRow button:hover { color: var(--accent-color); }
+.menuQuantityRow span {
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    color: var(--stroke-color-high);
+    min-width: 20px;
+    text-align: center;
+}
+
+
+.vaultBlock {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-width: 260px;
+    height: 320px;
+    max-height: 320px;
+    min-height: 0;
+    transition: box-shadow 0.15s;
+}
+
+.vaultBlockDragOver {
+    box-shadow: inset 0 0 0 2px var(--accent-color);
+}
+
+.containerBlock {
+    flex: 1;
+    min-width: 300px;
+}
+
+.vaultList {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--fill-color-very-light) transparent;
+    padding-right: 2px;
+}
+
+.vaultEmpty {
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--stroke-color-low);
+    padding: 6px 2px;
+}
+
+.vaultRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid var(--fill-color-light);
+    background: var(--fill-color-regular);
+    transition: border-color 0.15s;
+    flex-wrap: wrap;
+}
+.vaultRow:hover { border-color: var(--fill-color-very-light); }
+
+.vaultName {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--stroke-color-regular);
+    flex: 1;
+    min-width: 0;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.vaultAmount {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    color: var(--stroke-color-high);
+    flex-shrink: 0;
+}
+
+.vaultQuantityInput {
+    width: 44px;
+    background: var(--fill-color-darker);
+    border: 1px solid var(--fill-color-very-light);
+    color: var(--stroke-color-high);
+    font-family: 'Crimson Text', serif;
+    font-size: 12px;
+    padding: 3px 4px;
+    outline: none;
+    flex-shrink: 0;
+}
+.vaultQuantityInput:focus { border-color: var(--accent-color); }
+.vaultQuantityInput::-webkit-outer-spin-button,
+.vaultQuantityInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.vaultSendBtn {
+    background: transparent;
+    border: 1px solid var(--fill-color-very-light);
+    color: var(--stroke-color-low);
+    font-family: 'Cinzel', serif;
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 6px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color 0.15s, color 0.15s;
+}
+.vaultSendBtn:hover { border-color: var(--accent-color); color: var(--accent-color); }
+
+.vaultDropBtn {
+    background: transparent;
+    border: 1px solid var(--red-color-regular);
+    color: var(--red-color-light);
+    font-family: 'Cinzel', serif;
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 6px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
+}
+.vaultDropBtn:hover { background: var(--red-color-regular); color: white; }
+
+.vaultQuantityRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+.vaultQuantityRow button {
+    background: none;
+    border: none;
+    color: var(--stroke-color-regular);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 16px;
+    transition: color 0.1s;
+}
+.vaultQuantityRow button:hover { color: var(--accent-color); }
+.vaultQuantityRow span {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    color: var(--stroke-color-high);
+    min-width: 16px;
+    text-align: center;
+}
+
+.vaultConfirmBtn {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    font-size: 11px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
+}
+.vaultConfirmBtn:hover { background: var(--accent-color); color: var(--fill-color-dark); }

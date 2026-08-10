@@ -6,6 +6,8 @@ export const DEFAULT_STATS_CONDITION = {
     energy: 0 as number,
     focus: 0 as number, 
     anima: 0 as number,
+    movement: 0 as number,
+    range: 0 as number,
 }
 
 export type Stat = 
@@ -13,4 +15,6 @@ export type Stat =
     | 'ENERGY'
     | 'FOCUS'
     | 'ANIMA'
+    | 'MOVEMENT'
+    | 'RANGE'
 export type StatsCondition = typeof DEFAULT_STATS_CONDITION;

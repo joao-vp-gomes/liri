@@ -3,11 +3,11 @@
 
 import { Entry } from "./entry";
 import { AbilitiesGrimmoire } from "./utils/abilitiesGrimmoire";
-import { Effect, EffectIdentifier } from "./utils/effect";
-import { Modifier } from "./utils/modifier";
-import { AttributesConstellation, DEFAULT_ATTRIBUTES_CONSTELLATION } from "./utils/attributesConstellation";
+import type { Effect, EffectIdentifier } from "./utils/effect";
+import type { Modifier } from "./utils/modifier";
+import { type AttributesConstellation, DEFAULT_ATTRIBUTES_CONSTELLATION } from "./utils/attributesConstellation";
 import { ItemsInventory } from "./utils/itemsInventory";
-import { DEFAULT_STATS_CONDITION, Stat, StatsCondition } from "./utils/statsCondition";
+import { DEFAULT_STATS_CONDITION, type Stat, type StatsCondition } from "./utils/statsCondition";
 import { Equipable } from "./item";
 import { SkillsScroll } from "./utils/skillsScroll";
 
@@ -66,6 +66,10 @@ export class Character extends Entry {
             accumulation = this.searchEffect(slot?.quirks, identifier, accumulation);
         }
 
+        for (const slot of this.grimmoire.slots) {
+            if (slot?.reference) accumulation = this.searchEffect(slot.reference.traits, identifier, accumulation);
+        }
+
         if (accumulation.setter !== null) return accumulation.setter;
         return (baseValue + accumulation.adder)*accumulation.multiplier;
     }
@@ -96,6 +100,16 @@ export class Character extends Entry {
                 variable += this.accumulateEffect('POET_PATH', attCons.poetPath);
                 variable += this.accumulateEffect('CHARISMA', attCons.charisma);
                 break;
+            case 'MOVEMENT':
+                baseValue = 6; rate = 1;
+                variable += this.accumulateEffect('ROGUE_PATH', attCons.roguePath);
+                variable += this.accumulateEffect('BREATH', attCons.breath);
+                break;
+            case 'RANGE':
+                baseValue = 8; rate = 2;
+                variable += this.accumulateEffect('ROGUE_PATH', attCons.roguePath);
+                variable += this.accumulateEffect('PRECISION', attCons.precision);
+                break;
             default: break;
         }
 
@@ -108,6 +122,7 @@ export class Character extends Entry {
             case 'ENERGY': this.condition.energy = valueToSet; return;
             case 'FOCUS': this.condition.focus = valueToSet; return;
             case 'ANIMA': this.condition.anima = valueToSet; return;
+            case 'MOVEMENT': this.condition.movement = valueToSet; return;
         }
     }
 

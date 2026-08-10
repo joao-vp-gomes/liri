@@ -1,7 +1,7 @@
 // models/utils/skillsScroll.ts
 
 
-import { Skill, SkillIdentifier } from "./skill";
+import { Skill, type SkillIdentifier } from "./skill";
 
 
 export class SkillsScroll {

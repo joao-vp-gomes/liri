@@ -9,5 +9,10 @@ export interface Aspect {
 
     arcane: number;
 
+    wither: number;
+    delirium: number;
+    taint: number;
+    poison: number;
+
     pure: number;
 }

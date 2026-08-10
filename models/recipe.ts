@@ -1,11 +1,10 @@
 // models/recipe.ts
-// WORKING ON IT
 
 
-import { ItemInstance } from "./utils/itemInstance";
+import type { ItemInstance } from "./utils/itemInstance";
 import { Entry } from "./entry";
-import { Ingredient } from "./utils/ingredient";
-import { Competence } from "./utils/competence";
+import type { Ingredient } from "./utils/ingredient";
+import type { Competence } from "./utils/competence";
 
 
 export type RecipeKind = 'CRAFTING' | 'SMITHING' | 'ALCHEMY' | 'ENCHANTING' | 'COOKING';
@@ -15,7 +14,7 @@ export class Recipe extends Entry {
     public ingredients: Array<Ingredient>;
     // Certain recipes require certain competences to be performed.
     public competence: Competence | null;
-    public product: ItemInstance | null;
+    public products: Array<ItemInstance>;
 
     constructor(source?: Partial<Recipe>) {
         super(source);
@@ -24,7 +23,7 @@ export class Recipe extends Entry {
         this.kind = source?.kind ?? 'CRAFTING';
         this.ingredients = source?.ingredients ? [...source.ingredients] : new Array();
         this.competence = source?.competence ?? null;
-        this.product = source?.product ?? null;
+        this.products = source?.products ? [...source.products] : new Array();
     }
 
 }

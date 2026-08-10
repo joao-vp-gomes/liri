@@ -1,7 +1,7 @@
 // models/utils/modifier.ts
 
 
-import { Effect } from "./effect";
+import type { Effect } from "./effect";
 
 
 // Modifiers apply effects.

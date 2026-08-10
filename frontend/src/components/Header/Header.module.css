@@ -1,0 +1,166 @@
+/* frontend/src/components/Header/Header.module.css */
+
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4vh;
+    height: 7vh;
+    width: 100vw;
+    border-bottom: 0.04vh solid var(--fill-color-light);
+    background: var(--fill-color-dark);
+    position: fixed;
+    top: 0;
+    z-index: 50;
+
+}
+.logo img {
+    display: block;
+    height: 4vh;
+    width: auto;
+    cursor: pointer;
+}
+
+
+.rightSection {
+    display: flex;
+    align-items: center;
+    gap: 2vh;
+}
+
+
+.langContainer {
+    position: relative;
+}
+.langBtn {
+    height: 3vh;
+    width: 6vh;
+    display: flex;
+    align-items: center;
+    gap: 0.5vh;
+    background: none;
+    border: 0.04vh solid var(--fill-color-very-light);
+    color: var(--stroke-color-regular);
+    font-family: 'Cinzel', serif;
+    font-size: 1.2vh;
+    font-weight: 600;
+    letter-spacing: 0.2vh;
+    padding: 0.75vh 1vh;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+}
+.langBtn:hover {
+    border-color: var(--stroke-color-regular);
+    color: var(--stroke-color-high);
+}
+.langCaret {
+    font-size: 1.2vh;
+    color: var(--stroke-color-low);
+}
+
+.profileContainer {
+    display: flex;
+    align-items: center;
+    gap: 1.5vh;
+    position: relative;
+}
+.profileName {
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    font-size: 1.2vh;
+    letter-spacing: 0.2vh;
+    cursor: default;
+    color: var(--stroke-color-high);
+}
+.profileImageWrapper {
+    cursor: pointer;
+    border-radius: 50%;
+    width: 4vh;
+    height: 4vh;
+    border: 0.04vh solid var(--fill-color-light);
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: border-color 0.15s;
+}
+.profileImageWrapper:hover {
+    border-color: var(--accent-color);
+}
+.profileImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.floatingMenu {
+    position: absolute;
+    top: calc(100% + 1vh);
+    right: 0;
+    z-index: 100;
+    background: var(--fill-color-regular);
+    border: 0.04vh solid var(--fill-color-light);
+}
+.langContainer .floatingMenu {
+    width: 6vh;
+}
+
+.floatingMenuDivider {
+    border: none;
+    border-top: 0.04vh solid var(--fill-color-light);
+}
+.floatingMenuItem {
+    display: block;
+    width: 100%;
+    padding: 1vh 1.5vh;
+    background: none;
+    border: none;
+    text-align: left;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2vh;
+    font-weight: 600;
+    letter-spacing: 0.2vh;
+    text-transform: uppercase;
+    color: var(--stroke-color-regular);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+}
+.floatingMenuItem:hover {
+    background: var(--fill-color-lighter);
+    color: var(--stroke-color-high);
+}
+.floatingMenuItemActive {
+    color: var(--accent-color);
+}
+
+.iconPickerRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh;
+    padding: 1vh 1.5vh;
+}
+.iconPickerBtn {
+    background: none;
+    border: 0.04vh solid var(--fill-color-very-light);
+    border-radius: 50%;
+    width: 4vh;
+    height: 4vh;
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color 0.12s;
+}
+.iconPickerBtn img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.iconPickerBtn:hover {
+    border-color: var(--stroke-color-regular);
+}
+.iconPickerBtnActive {
+    border-color: var(--accent-color);
+}

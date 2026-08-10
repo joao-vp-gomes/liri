@@ -1,0 +1,41 @@
+/* frontend/src/index.css */
+
+
+:root {
+
+    --fill-color-very-dark:    #0b0906;
+    --fill-color-dark:         #110e09;
+    --fill-color-darker:       #171109;
+    --fill-color-regular:      #201a12;
+    --fill-color-lighter:      #271e15;
+    --fill-color-light:        #2e2418;
+    --fill-color-very-light:   #3d3020;
+
+    --stroke-color-high:       #c9b99a;
+    --stroke-color-regular:    #9a7d52;
+    --stroke-color-low:        #5a4a35;
+
+    --accent-color:            #c49a5a;
+    --accent-color-dark:       #8a6830;
+
+    --green-color-light:       #6a8a4a;
+    --green-color-regular:     #4a6a2a;
+    --green-color-dark:        #2a4a1a;
+
+    --red-color-light:         #b04030;
+    --red-color-regular:       #8a2a1a;
+    --red-color-dark:          #5a1a0a;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: #171109;
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='20' viewBox='0 0 16 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23201a12' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M8 0v20L0 10M16 0v10L8 0M16 10v10H8'/%3E%3C/g%3E%3C/svg%3E");
+    overflow-x: hidden;
+}

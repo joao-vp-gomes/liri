@@ -1,0 +1,12 @@
+/* frontend/src/components/MainLogo/MainLogo.module.css */
+
+
+.logoFull {
+    align-self: center;
+    margin-top: 24px;
+    margin-bottom: 40px;
+    padding-right: 10px;
+}
+.logoFull img {
+    width: min(300px, 90vw);
+}

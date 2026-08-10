@@ -151,6 +151,11 @@ export class InfiniteStorage {
         if (itemInstance.currentStack <= 0) this.content.splice(index, 1);
         return itemInstanceToRemove;
     }
+    removeByKey(key: string, quantity: number): ItemInstance | null {
+        const index = this.content.findIndex(itemInstance => itemInstance.reference.key === key);
+        if (index === -1) return null;
+        return this.removeByIndex(index, quantity);
+    }
 
     findByKey(key: string): ItemInstance | null {
         for (const itemInstance of this.content) {

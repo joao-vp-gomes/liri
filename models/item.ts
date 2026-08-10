@@ -2,9 +2,9 @@
 
 
 import { Entry } from "./entry";
-import { Aspect } from "./utils/aspect";
-import { Composition } from "./utils/composition";
-import { Modifier } from "./utils/modifier";
+import type { Aspect } from "./utils/aspect";
+import type { Composition } from "./utils/composition";
+import type { Modifier } from "./utils/modifier";
 
 
 export type ItemKind = 

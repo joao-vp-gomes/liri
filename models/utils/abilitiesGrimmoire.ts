@@ -1,7 +1,7 @@
 // models/utils/abilitiesGrimmoire.ts
 
 
-import { AbilityInstance } from './abilityInstance'
+import type { AbilityInstance } from './abilityInstance'
 
 
 const GRIMMOIRE_SIZE = 6;

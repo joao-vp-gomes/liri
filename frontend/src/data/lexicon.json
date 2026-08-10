@@ -1,0 +1,858 @@
+{
+    "king-of-rome": {
+        "en": "king of Rome",
+        "pt": "rei de Roma"
+    },
+    "liri": {
+        "en": "liri",
+        "pt": "liri"
+    },
+    "anon": {
+        "en": "anonymous",
+        "pt": "anônimo"
+    },
+    "disconnect": {
+        "en": "disconnect",
+        "pt": "desconectar"
+    },
+    "sign-in": {
+        "en": "Sign In",
+        "pt": "Entrar"
+    },
+    "username": {
+        "en": "username",
+        "pt": "usuário"
+    },
+    "password": {
+        "en": "password",
+        "pt": "senha"
+    },
+    "username-placeholder": {
+        "en": "username",
+        "pt": "usuário"
+    },
+    "password-placeholder": {
+        "en": "••••••••",
+        "pt": "••••••••"
+    },
+    "invalid-credentials": {
+        "en": "invalid credentials. Please try again.",
+        "pt": "credenciais inválidas. Por favor, tente novamente."
+    },
+    "anon-sign-in-error": {
+        "en": "could not sign in anonymously.",
+        "pt": "não foi possível entrar anonimamente."
+    },
+    "signing-in": {
+        "en": "signing in…",
+        "pt": "entrando…"
+    },
+    "enter-as-anon": {
+        "en": "enter anonymously",
+        "pt": "entrar anonimamente"
+    },
+    "entering-as-anon": {
+        "en": "entering anonymously...",
+        "pt": "entrando anonimamente..."
+    },
+    "campaign": {
+        "en": "campaign",
+        "pt": "campanha"
+    },
+    "codex": {
+        "en": "codex",
+        "pt": "códice"
+    },
+    "rules": {
+        "en": "rules",
+        "pt": "regras"
+    },
+    "moderation": {
+        "en": "moderation",
+        "pt": "moderação"
+    },
+    "new-character": {
+        "en": "new character",
+        "pt": "novo personagem"
+    },
+    "members": {
+        "en": "members",
+        "pt": "membros"
+    },
+    "anonymous": {
+        "en": "anonymous",
+        "pt": "anônimos"
+    },
+    "no-anonymous": {
+        "en": "no anonymous users online",
+        "pt": "nenhum anônimo online"
+    },
+    "new-member": {
+        "en": "new member",
+        "pt": "novo membro"
+    },
+    "name": {
+        "en": "name",
+        "pt": "nome"
+    },
+    "characters": {
+        "en": "characters",
+        "pt": "personagens"
+    },
+    "save": {
+        "en": "save",
+        "pt": "salvar"
+    },
+    "delete": {
+        "en": "delete",
+        "pt": "deletar"
+    },
+    "cancel": {
+        "en": "cancel",
+        "pt": "cancelar"
+    },
+    "create": {
+        "en": "create",
+        "pt": "criar"
+    },
+    "user-protection-breach-message": {
+        "en": "access denied: Lack of permission",
+        "pt": "acesso negado: Falta de permissão"
+    },
+    "back-home": {
+        "en": "back to home page",
+        "pt": "retornar à página principal"
+    },
+    "confirm-deletion": {
+        "en": "please confirm.",
+        "pt": "por favor confime."
+    },
+    "clear-filters": {
+        "en": "clear filters",
+        "pt": "limpar filtros"
+    },
+    "confirm-delete": {
+        "en": "confirm delete",
+        "pt": "confirmar exclusão"
+    },
+    "description": {
+        "en": "description",
+        "pt": "descrição"
+    },
+    "effect": {
+        "en": "effect",
+        "pt": "efeito"
+    },
+    "modifier": {
+        "en": "modifier",
+        "pt": "modificador"
+    },
+    "modifiers": {
+        "en": "modifiers",
+        "pt": "modificadores"
+    },
+    "save-error": {
+        "en": "error saving",
+        "pt": "erro ao salvar"
+    },
+    "saved": {
+        "en": "saved",
+        "pt": "salvo"
+    },
+    "saving": {
+        "en": "saving",
+        "pt": "salvando"
+    },
+    "apparel": {
+        "en": "apparel",
+        "pt": "vestimenta"
+    },
+    "tool": {
+        "en": "tool",
+        "pt": "ferramenta"
+    },
+    "accessory": {
+        "en": "accessory",
+        "pt": "acessório"
+    },
+    "material": {
+        "en": "material",
+        "pt": "material"
+    },
+    "pawn": {
+        "en": "pawn",
+        "pt": "peão"
+    },
+    "roster": {
+        "en": "roster",
+        "pt": "patrulha"
+    },
+    "catalogue": {
+        "en": "catalogue",
+        "pt": "catálogo"
+    },
+    "melee-weapon": {
+        "en": "melee Weapon",
+        "pt": "arma Corpo a Corpo"
+    },
+    "bow": {
+        "en": "bow",
+        "pt": "arco"
+    },
+    "staff": {
+        "en": "staff",
+        "pt": "cajado"
+    },
+    "slash-damage": {
+        "en": "slash Damage",
+        "pt": "dano de Corte"
+    },
+    "pierce-damage": {
+        "en": "pierce Damage",
+        "pt": "dano de Perfuração"
+    },
+    "bludgeon-damage": {
+        "en": "bludgeon Damage",
+        "pt": "dano de Impacto"
+    },
+    "defense": {
+        "en": "defense",
+        "pt": "defesa"
+    },
+    "damage": {
+        "en": "damage",
+        "pt": "dano"
+    },
+    "connection": {
+        "en": "connection",
+        "pt": "conexão"
+    },
+    "vis": {
+        "en": "vis",
+        "pt": "vis"
+    },
+    "cus": {
+        "en": "cus",
+        "pt": "cus"
+    },
+    "new-entry": {
+        "en": "new Entry",
+        "pt": "nova Entrada"
+    },
+    "ranged-weapon": {
+        "en": "ranged Weapon",
+        "pt": "arma de Distância"
+    },
+    "shield": {
+        "en": "shield",
+        "pt": "escudo"
+    },
+    "tome": {
+        "en": "tome",
+        "pt": "tomo"
+    },
+    "instrument": {
+        "en": "instrument",
+        "pt": "instrumento"
+    },
+    "medical-kit": {
+        "en": "medical Kit",
+        "pt": "kit Médico"
+    },
+    "kind": {
+        "en": "kind",
+        "pt": "tipo"
+    },
+    "compositions": {
+        "en": "composition",
+        "pt": "composição"
+    },
+    "adder": {
+        "en": "adder",
+        "pt": "adicionador"
+    },
+    "multiplier": {
+        "en": "multiplier",
+        "pt": "multiplicador"
+    },
+    "setter": {
+        "en": "setter",
+        "pt": "definidor"
+    },
+    "identifier": {
+        "en": "identifier",
+        "pt": "identificador"
+    },
+    "timing": {
+        "en": "timing",
+        "pt": "tempo"
+    },
+    "cooldown": {
+        "en": "cooldown",
+        "pt": "recarga"
+    },
+    "duration": {
+        "en": "duration",
+        "pt": "duração"
+    },
+    "start-cost": {
+        "en": "start Cost",
+        "pt": "custo Inicial"
+    },
+    "duration-cost": {
+        "en": "duration Cost",
+        "pt": "custo de Duração"
+    },
+    "finish-cost": {
+        "en": "finish Cost",
+        "pt": "custo Final"
+    },
+    "add-cost": {
+        "en": "add Cost",
+        "pt": "adicionar Custo"
+    },
+    "remove": {
+        "en": "remove",
+        "pt": "remover"
+    },
+    "health": {
+        "en": "health",
+        "pt": "vida"
+    },
+    "energy": {
+        "en": "energy",
+        "pt": "energia"
+    },
+    "focus": {
+        "en": "focus",
+        "pt": "foco"
+    },
+    "anima": {
+        "en": "anima",
+        "pt": "ânimo"
+    },
+    "competence": {
+        "en": "competence",
+        "pt": "competência"
+    },
+    "competences": {
+        "en": "competences",
+        "pt": "competências"
+    },
+    "costs": {
+        "en": "costs",
+        "pt": "custos"
+    },
+    "skill": {
+        "en": "skill",
+        "pt": "perícia"
+    },
+    "required-exp": {
+        "en": "required Experience",
+        "pt": "experiência Necessária"
+    },
+    "experience-contribution": {
+        "en": "experience Contribution",
+        "pt": "contribuição de Experiência"
+    },
+    "trait": {
+        "en": "trait",
+        "pt": "traço"
+    },
+    "traits": {
+        "en": "traits",
+        "pt": "traços"
+    },
+    "entry": {
+        "en": "entry",
+        "pt": "entrada"
+    },
+    "character": {
+        "en": "character",
+        "pt": "personagem"
+    },
+    "item": {
+        "en": "item",
+        "pt": "item"
+    },
+    "ability": {
+        "en": "ability",
+        "pt": "habilidade"
+    },
+    "recipe": {
+        "en": "recipe",
+        "pt": "receita"
+    },
+    "weapon": {
+        "en": "weapon",
+        "pt": "arma"
+    },
+    "consumable": {
+        "en": "consumable",
+        "pt": "consumível"
+    },
+    "artifact": {
+        "en": "artifact",
+        "pt": "artefato"
+    },
+    "container": {
+        "en": "container",
+        "pt": "recipiente"
+    },
+    "efficiency": {
+        "en": "efficiency",
+        "pt": "eficiência"
+    },
+    "resistance": {
+        "en": "resistance",
+        "pt": "resistência"
+    },
+    "protection": {
+        "en": "protection",
+        "pt": "proteção"
+    },
+    "weight": {
+        "en": "weight",
+        "pt": "peso"
+    },
+    "size": {
+        "en": "size",
+        "pt": "tamanho"
+    },
+    "durability": {
+        "en": "durability",
+        "pt": "durabilidade"
+    },
+    "stack": {
+        "en": "stack",
+        "pt": "pilha"
+    },
+    "search-material": {
+        "en": "search Item",
+        "pt": "buscar Item"
+    },
+    "slash": {
+        "en": "slash",
+        "pt": "corte"
+    },
+    "pierce": {
+        "en": "pierce",
+        "pt": "perfuração"
+    },
+    "bludgeon": {
+        "en": "bludgeon",
+        "pt": "impacto"
+    },
+    "arcane": {
+        "en": "arcane",
+        "pt": "arcano"
+    },
+    "pure": {
+        "en": "pure",
+        "pt": "puro"
+    },
+    "stats": {
+        "en": "stats",
+        "pt": "stats"
+    },
+    "condition": {
+        "en": "condition",
+        "pt": "condição"
+    },
+    "inventory": {
+        "en": "inventory",
+        "pt": "inventário"
+    },
+    "attributes": {
+        "en": "attributes",
+        "pt": "atributos"
+    },
+    "skills": {
+        "en": "skills",
+        "pt": "perícias"
+    },
+    "craft": {
+        "en": "craft",
+        "pt": "criar"
+    },
+    "character-name-prompt": {
+        "en": "character Name",
+        "pt": "nome do Personagem"
+    },
+    "pocket": {
+        "en": "pocket",
+        "pt": "bolso"
+    },
+    "equipment": {
+        "en": "equipment",
+        "pt": "equipamento"
+    },
+    "vault": {
+        "en": "vault",
+        "pt": "cofre"
+    },
+    "equip": {
+        "en": "equip",
+        "pt": "equipar"
+    },
+    "unequip": {
+        "en": "unequip",
+        "pt": "desequipar"
+    },
+    "add-item": {
+        "en": "add item",
+        "pt": "adicionar item"
+    },
+    "quirks": {
+        "en": "quirks",
+        "pt": "peculiaridades"
+    },
+    "empty": {
+        "en": "empty",
+        "pt": "vazio"
+    },
+    "right-hand": {
+        "en": "right Hand",
+        "pt": "mão Direita"
+    },
+    "left-hand": {
+        "en": "left Hand",
+        "pt": "mão Esquerda"
+    },
+    "accessory-1": {
+        "en": "accessory 1",
+        "pt": "acessório 1"
+    },
+    "accessory-2": {
+        "en": "accessory 2",
+        "pt": "acessório 2"
+    },
+    "send-to-pocket": {
+        "en": "send to Pocket",
+        "pt": "enviar ao Bolso"
+    },
+    "send-to-storage": {
+        "en": "send to Storage",
+        "pt": "enviar ao Cofre"
+    },
+    "send-to-container": {
+        "en": "send to Container",
+        "pt": "enviar ao Recipiente"
+    },
+    "current-stack": {
+        "en": "current Stack",
+        "pt": "pilha Atual"
+    },
+    "grimmoire": {
+        "en": "grimmoire",
+        "pt": "grimório"
+    },
+    "insert-ability": {
+        "en": "insert Ability",
+        "pt": "inserir Habilidade"
+    },
+    "remove-ability": {
+        "en": "remove Ability",
+        "pt": "remover Habilidade"
+    },
+    "search-ability": {
+        "en": "search Ability",
+        "pt": "buscar Habilidade"
+    },
+    "wither": {
+        "en": "wither",
+        "pt": "apodrecimento"
+    },
+    "delirium": {
+        "en": "delirium",
+        "pt": "delírio"
+    },
+    "taint": {
+        "en": "taint",
+        "pt": "mácula"
+    },
+    "poison": {
+        "en": "poison",
+        "pt": "veneno"
+    },
+    "examine": {
+        "en": "examine",
+        "pt": "examinar"
+    },
+    "warrior-path": {
+        "en": "warrior Path",
+        "pt": "caminho do Guerreiro"
+    },
+    "rogue-path": {
+        "en": "rogue Path",
+        "pt": "caminho do Ladino"
+    },
+    "sage-path": {
+        "en": "sage Path",
+        "pt": "caminho do Sábio"
+    },
+    "poet-path": {
+        "en": "poet Path",
+        "pt": "caminho do Poeta"
+    },
+    "prowess": {
+        "en": "prowess",
+        "pt": "proeza"
+    },
+    "strength": {
+        "en": "strength",
+        "pt": "força"
+    },
+    "lethality": {
+        "en": "lethality",
+        "pt": "letalidade"
+    },
+    "constitution": {
+        "en": "constitution",
+        "pt": "constituição"
+    },
+    "temper": {
+        "en": "temper",
+        "pt": "têmpera"
+    },
+    "instinct": {
+        "en": "instinct",
+        "pt": "instinto"
+    },
+    "stealth": {
+        "en": "stealth",
+        "pt": "furtividade"
+    },
+    "precision": {
+        "en": "precision",
+        "pt": "precisão"
+    },
+    "dexterity": {
+        "en": "dexterity",
+        "pt": "destreza"
+    },
+    "breath": {
+        "en": "breath",
+        "pt": "fôlego"
+    },
+    "metabolism": {
+        "en": "metabolism",
+        "pt": "metabolismo"
+    },
+    "shivers": {
+        "en": "shivers",
+        "pt": "calafrios"
+    },
+    "brewing": {
+        "en": "brewing",
+        "pt": "alquimia"
+    },
+    "engineering": {
+        "en": "engineering",
+        "pt": "engenharia"
+    },
+    "erudition": {
+        "en": "erudition",
+        "pt": "erudição"
+    },
+    "intellect": {
+        "en": "intellect",
+        "pt": "intelecto"
+    },
+    "composure": {
+        "en": "composure",
+        "pt": "compostura"
+    },
+    "insight": {
+        "en": "insight",
+        "pt": "compreensão"
+    },
+    "drama": {
+        "en": "drama",
+        "pt": "drama"
+    },
+    "rhetoric": {
+        "en": "rhetoric",
+        "pt": "retórica"
+    },
+    "threat": {
+        "en": "threat",
+        "pt": "ameaça"
+    },
+    "charisma": {
+        "en": "charisma",
+        "pt": "carisma"
+    },
+    "attunement": {
+        "en": "attunement",
+        "pt": "sintonia"
+    },
+    "empathy": {
+        "en": "empathy",
+        "pt": "empatia"
+    },
+    "current-experience": {
+        "en": "current Experience",
+        "pt": "experiência Atual"
+    },
+    "transfer": {
+        "en": "transfer",
+        "pt": "transferir"
+    },
+    "search-character": {
+        "en": "search Character",
+        "pt": "buscar Personagem"
+    },
+    "movement": {
+        "en": "movement",
+        "pt": "movimento"
+    },
+    "bone-treatment": {
+        "en": "bone Treatment",
+        "pt": "tratamento Ósseo"
+    },
+    "blood-treatment": {
+        "en": "blood Treatment",
+        "pt": "tratamento Sanguíneo"
+    },
+    "nerves-treatment": {
+        "en": "nerves Treatment",
+        "pt": "tratamento Nervoso"
+    },
+    "pyrotechnics-alchemy": {
+        "en": "pyrotechnics Alchemy",
+        "pt": "alquimia de Pirotecnia"
+    },
+    "elixirs-alchemy": {
+        "en": "elixirs Alchemy",
+        "pt": "alquimia de Elixires"
+    },
+    "oils-alchemy": {
+        "en": "oils Alchemy",
+        "pt": "alquimia de Óleos"
+    },
+    "smith-craft": {
+        "en": "smith Craft",
+        "pt": "trabalho em Metal"
+    },
+    "engineer-craft": {
+        "en": "engineering Craft",
+        "pt": "trabalho em Engenharia"
+    },
+    "tinker-craft": {
+        "en": "tinker Craft",
+        "pt": "trabalho em Conserto"
+    },
+    "comedy-art": {
+        "en": "comedy Art",
+        "pt": "arte Cômica"
+    },
+    "tragedy-art": {
+        "en": "tragedy Art",
+        "pt": "arte Trágica"
+    },
+    "epic-art": {
+        "en": "epic Art",
+        "pt": "arte Épica"
+    },
+    "lyric-art": {
+        "en": "lyric Art",
+        "pt": "arte Lírica"
+    },
+    "hammer-brawl": {
+        "en": "hammer Brawl",
+        "pt": "luta com Martelo"
+    },
+    "fist-brawl": {
+        "en": "fist Brawl",
+        "pt": "luta com Punhos"
+    },
+    "rod-brawl": {
+        "en": "rod Brawl",
+        "pt": "luta com Bastão"
+    },
+    "axe-brawl": {
+        "en": "axe Brawl",
+        "pt": "luta com Machado"
+    },
+    "sword-brawl": {
+        "en": "sword Brawl",
+        "pt": "luta com Espada"
+    },
+    "halberd-brawl": {
+        "en": "halberd Brawl",
+        "pt": "luta com Alabarda"
+    },
+    "spear-brawl": {
+        "en": "spear Brawl",
+        "pt": "luta com Lança"
+    },
+    "dagger-brawl": {
+        "en": "dagger Brawl",
+        "pt": "luta com Adaga"
+    },
+    "bow-brawl": {
+        "en": "bow Brawl",
+        "pt": "luta com Arco"
+    },
+    "action-type": {
+        "en": "action Type",
+        "pt": "tipo de Ação"
+    },
+    "primary-action": {
+        "en": "primary Action",
+        "pt": "ação Primária"
+    },
+    "secondary-action": {
+        "en": "secondary Action",
+        "pt": "ação Secundária"
+    },
+    "reaction": {
+        "en": "reaction",
+        "pt": "reação"
+    },
+    "range": {
+        "en": "range",
+        "pt": "alcance"
+    },
+    "drop": {
+        "en": "drop",
+        "pt": "descartar"
+    },
+    "ingredients": {
+        "en": "ingredients",
+        "pt": "ingredientes"
+    },
+    "products": {
+        "en": "products",
+        "pt": "produtos"
+    },
+    "required": {
+        "en": "required",
+        "pt": "necessário"
+    },
+    "current": {
+        "en": "current",
+        "pt": "atual"
+    },
+    "crafting": {
+        "en": "crafting",
+        "pt": "artesanato"
+    },
+    "smithing": {
+        "en": "smithing",
+        "pt": "ferraria"
+    },
+    "alchemy": {
+        "en": "alchemy",
+        "pt": "alquimia"
+    },
+    "enchanting": {
+        "en": "enchanting",
+        "pt": "encantamento"
+    },
+    "cooking": {
+        "en": "cooking",
+        "pt": "culinária"
+    }
+}

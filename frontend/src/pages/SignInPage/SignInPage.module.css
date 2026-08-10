@@ -1,0 +1,116 @@
+/* frontend/src/pages/SignInPage/SignInPage.module.css */
+
+
+@media (max-width: 480px) {
+    .input {
+        font-size: 16px;
+        padding: 10px;
+    }
+    .label {
+        font-size: 10px;
+    }
+}
+
+.page {
+    margin: 7vh;
+    padding-top: 20vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 400px;
+}
+.form {
+    border-radius: 5px;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 20px;
+}
+.label {
+    text-justify: center;
+    align-self: center;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--stroke-color-regular);
+}
+.input {
+    text-align: center;
+    background: var(--fill-color-darker);
+    border: 1px solid var(--fill-color-very-light);
+    color: var(--stroke-color-high);
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 20px;
+    padding: 10px 15px;
+    outline: none;
+    width: min(600px, 90vw);
+    transition: border-color 0.15s;
+}
+.input:focus {
+    border-color: var(--accent-color);
+}
+.error {
+    font-style: italic;
+    font-size: 18px;
+    color: var(--red-color-light);
+    margin-bottom: 16px;
+    text-align: center;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+    align-self: center;
+    width: min(400px, 90vw);
+}
+.buttonPrimary .buttonSecondary {
+    width: 100%;
+}
+.buttonPrimary {
+    background: var(--accent-color);
+    border: none;
+    color: var(--fill-color-dark);
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 14px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+.buttonPrimary:hover { background: var(--accent-color-dark); color: var(--stroke-color-high); }
+.buttonPrimary:disabled { background: var(--fill-color-light); color: var(--stroke-color-low); cursor: not-allowed; }
+.buttonSecondary {
+    background: var(--fill-color-darker);
+    border: 1px solid var(--fill-color-very-light);
+    color: var(--stroke-color-low);
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 14px;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+}
+.buttonSecondary:hover { border-color: var(--stroke-color-low); color: var(--accent-color); }
+.buttonSecondary:disabled { opacity: 0.4; cursor: not-allowed; }

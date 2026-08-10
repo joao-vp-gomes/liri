@@ -3,7 +3,7 @@
 
 
 import { Breakable, Container, Item } from "../item";
-import { Modifier } from "./modifier";
+import type { Modifier } from "./modifier";
 import { FiniteStorage } from "./storage";
 
 
