@@ -1255,3 +1255,18 @@
 }
 .recipeQuantityConfirm:hover { background: var(--accent-color) !important; color: var(--fill-color-dark) !important; }
 .cancelBtn:hover { background: var(--fill-color-very-light); }
+
+.catalogueRecipeBlock {
+    position: relative;
+    border: 1px solid var(--fill-color-light);
+    padding: 20px 20px 16px;
+    margin-bottom: 20px;
+}
+
+.catalogueCompetenceRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}

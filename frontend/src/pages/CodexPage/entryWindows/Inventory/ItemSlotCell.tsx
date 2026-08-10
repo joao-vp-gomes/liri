@@ -11,6 +11,7 @@ import type { Modifier } from '../../../../../../models/utils/modifier.ts';
 import type { Effect } from '../../../../../../models/utils/effect.ts';
 import FloatingSearch from '../../../../components/FloatingSearch/FloatingSearch';
 import NumberFieldCard from '../NumberFieldCard';
+import { useClampedPosition, type Anchor } from '../../../../utils/useClampedPosition';
 
 import sharedStyles from '../entryWindows.module.css';
 import styles from './Inventory.module.css';
@@ -48,18 +49,20 @@ const ItemSlotCell: React.FC<Props> = ({
     const navigate = useNavigate();
     const reference = instance?.reference ?? null;
 
-    const [menuPos, setMenuPos] = useState<{ x: number; y: number } | null>(null);
+    const [menuPos, setMenuPos] = useState<Anchor | null>(null);
     const [quantity, setQuantity] = useState(1);
     const [searchMode, setSearchMode] = useState<'add-item' | 'transfer' | null>(null);
-    const [searchPos, setSearchPos] = useState<{ x: number; y: number } | null>(null);
+    const [searchPos, setSearchPos] = useState<Anchor | null>(null);
     const [expanded, setExpanded] = useState(false);
-    const [panelPos, setPanelPos] = useState<{ x: number; y: number } | null>(null);
+    const [panelPos, setPanelPos] = useState<Anchor | null>(null);
     const [isDragOver, setIsDragOver] = useState(false);
 
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const menuRef = useRef<HTMLDivElement>(null);
-    const panelRef = useRef<HTMLDivElement>(null);
     const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    const { ref: menuRef, style: menuStyle } = useClampedPosition(menuPos);
+    const { ref: panelRef, style: panelStyle } = useClampedPosition(panelPos);
+    const { ref: searchRef, style: searchStyle } = useClampedPosition(searchPos);
 
     useEffect(() => {
         if (!menuPos) return;
@@ -76,7 +79,7 @@ const ItemSlotCell: React.FC<Props> = ({
         if (!instance) return;
         if (closeTimerRef.current) { clearTimeout(closeTimerRef.current); closeTimerRef.current = null; }
         const rect = wrapperRef.current?.getBoundingClientRect();
-        if (rect) setPanelPos({ x: rect.left, y: rect.bottom + 8 });
+        if (rect) setPanelPos({ top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right });
         setExpanded(true);
     };
     const scheduleCloseExpand = () => {
@@ -91,7 +94,7 @@ const ItemSlotCell: React.FC<Props> = ({
         if (!instance && !onAddItem) return;
         if (instance) setQuantity(Math.min(instance.currentStack, instance.reference.stack));
         const rect = wrapperRef.current?.getBoundingClientRect();
-        setMenuPos(rect ? { x: rect.left, y: rect.bottom + 6 } : { x: 0, y: 0 });
+        setMenuPos(rect ? { top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right } : { top: 0, bottom: 0, left: 0, right: 0 });
     };
 
     const quantityRelevant = instance && reference && instance.currentStack > 1 && (!!onTransfer || actions.some(a => a.usesQuantity !== false));
@@ -157,7 +160,7 @@ const ItemSlotCell: React.FC<Props> = ({
             {expanded && instance && reference && panelPos && (
                 <div
                     className={styles.slotExpandPanel}
-                    style={{ left: panelPos.x, top: panelPos.y }}
+                    style={panelStyle}
                     ref={panelRef}
                     onMouseEnter={openExpand}
                     onMouseLeave={scheduleCloseExpand}
@@ -263,7 +266,7 @@ const ItemSlotCell: React.FC<Props> = ({
             )}
 
             {menuPos && (
-                <div className={styles.contextMenu} style={{ left: menuPos.x, top: menuPos.y }} ref={menuRef}>
+                <div className={styles.contextMenu} style={menuStyle} ref={menuRef}>
                     {instance
                         ? <>
                             <button
@@ -310,7 +313,7 @@ const ItemSlotCell: React.FC<Props> = ({
             )}
 
             {searchMode === 'add-item' && searchPos && (
-                <div className={styles.searchAnchor} style={{ left: searchPos.x, top: searchPos.y }}>
+                <div className={styles.searchAnchor} style={searchStyle} ref={searchRef}>
                     <FloatingSearch
                         categories={['ITEM']}
                         onSelect={result => { onAddItem?.(result.key); }}
@@ -321,7 +324,7 @@ const ItemSlotCell: React.FC<Props> = ({
             )}
 
             {searchMode === 'transfer' && searchPos && instance && (
-                <div className={styles.searchAnchor} style={{ left: searchPos.x, top: searchPos.y }}>
+                <div className={styles.searchAnchor} style={searchStyle} ref={searchRef}>
                     <FloatingSearch
                         categories={['CHARACTER']}
                         onSelect={result => { onTransfer?.(result.key, quantity); }}

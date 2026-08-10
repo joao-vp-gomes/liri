@@ -24,7 +24,7 @@ export const getImageUrl = (imagePath: string | null | undefined, category: Entr
         case 'CHARACTER': return characterImage;
         case 'ITEM': return itemImage;
         case 'ABILITY': return abilityImage;
-        case 'RECIPE': return recipeImage;
+        case 'CATALOGUE': return recipeImage;
         default: return itemImage;
     }
 

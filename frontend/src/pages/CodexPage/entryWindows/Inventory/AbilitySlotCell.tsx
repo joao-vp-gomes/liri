@@ -8,6 +8,7 @@ import { t } from '../../../../utils/localizer';
 import { getImageUrl } from '../../../../services/useImageUpload';
 import type { AbilityInstance } from '../../../../../../models/utils/abilityInstance.ts';
 import FloatingSearch from '../../../../components/FloatingSearch/FloatingSearch';
+import { useClampedPosition, type Anchor } from '../../../../utils/useClampedPosition';
 
 import styles from './Inventory.module.css';
 
@@ -29,13 +30,14 @@ const AbilitySlotCell: React.FC<Props> = ({ instance, customization, topLabel, o
     const navigate = useNavigate();
     const reference = instance?.reference ?? null;
 
-    const [menuPos, setMenuPos] = useState<{ x: number; y: number } | null>(null);
+    const [menuPos, setMenuPos] = useState<Anchor | null>(null);
     const [searchOpen, setSearchOpen] = useState(false);
-    const [searchPos, setSearchPos] = useState<{ x: number; y: number } | null>(null);
+    const [searchPos, setSearchPos] = useState<Anchor | null>(null);
     const [isDragOver, setIsDragOver] = useState(false);
 
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const menuRef = useRef<HTMLDivElement>(null);
+    const { ref: menuRef, style: menuStyle } = useClampedPosition(menuPos);
+    const { ref: searchRef, style: searchStyle } = useClampedPosition(searchPos);
 
     useEffect(() => {
         if (!menuPos) return;
@@ -52,7 +54,7 @@ const AbilitySlotCell: React.FC<Props> = ({ instance, customization, topLabel, o
             return;
         }
         const rect = wrapperRef.current?.getBoundingClientRect();
-        setMenuPos(rect ? { x: rect.left, y: rect.bottom + 6 } : { x: 0, y: 0 });
+        setMenuPos(rect ? { top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right } : { top: 0, bottom: 0, left: 0, right: 0 });
     };
 
     return (
@@ -75,7 +77,7 @@ const AbilitySlotCell: React.FC<Props> = ({ instance, customization, topLabel, o
             <div className={styles.slotName}>{reference ? (reference.name || '—') : ''}</div>
 
             {menuPos && (
-                <div className={styles.contextMenu} style={{ left: menuPos.x, top: menuPos.y }} ref={menuRef}>
+                <div className={styles.contextMenu} style={menuStyle} ref={menuRef}>
                     {instance ? (
                         <>
                             <button
@@ -103,7 +105,7 @@ const AbilitySlotCell: React.FC<Props> = ({ instance, customization, topLabel, o
             )}
 
             {searchOpen && searchPos && (
-                <div className={styles.searchAnchor} style={{ left: searchPos.x, top: searchPos.y }}>
+                <div className={styles.searchAnchor} style={searchStyle} ref={searchRef}>
                     <FloatingSearch
                         categories={['ABILITY']}
                         onSelect={result => { onInsert(result.key); }}

@@ -7,9 +7,10 @@ import { t } from '../../../../utils/localizer';
 import { supabase } from '../../../../services/supabase';
 import { EntryFactory } from '../../../../../../models/entryFactory.ts';
 import { Character } from '../../../../../../models/character.ts';
-import { Recipe } from '../../../../../../models/recipe.ts';
+import { Catalogue, type Recipe } from '../../../../../../models/catalogue.ts';
 import ItemSlotCell from './ItemSlotCell';
 import RecipeSlot from '../RecipeSlot';
+import { useClampedPosition, type Anchor } from '../../../../utils/useClampedPosition';
 
 import sharedStyles from '../entryWindows.module.css';
 import styles from './Inventory.module.css';
@@ -32,7 +33,7 @@ interface PendingTransfer {
     name: string | null;
     available: number;
     quantity: number;
-    pos: { x: number; y: number };
+    pos: Anchor;
 }
 
 const chunk = <ItemT,>(arr: ItemT[], size: number): ItemT[][] => {
@@ -58,7 +59,7 @@ const CraftSection: React.FC<Props> = ({ character, customization, onChange }) =
 
     const dragSourceRef = useRef<WorkbenchDragSource | null>(null);
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const pendingTransferRef = useRef<HTMLDivElement>(null);
+    const { ref: pendingTransferRef, style: pendingTransferStyle } = useClampedPosition(pendingTransfer?.pos ?? null);
 
     useEffect(() => {
         if (!pendingTransfer) return;
@@ -79,10 +80,13 @@ const CraftSection: React.FC<Props> = ({ character, customization, onChange }) =
             inventory.workbench.content.forEach(inst => {
                 available[inst.reference.key] = (available[inst.reference.key] ?? 0) + inst.currentStack;
             });
-            const { data, error } = await supabase.from('entries').select('data').eq('category', 'RECIPE');
+            const { data, error } = await supabase.from('entries').select('data').eq('category', 'CATALOGUE');
             if (error || !data) { setMatchedRecipe(null); return; }
-            const found = data
-                .map((row: any) => EntryFactory.instantiate(row.data) as Recipe)
+            const catalogues = data
+                .map((row: any) => EntryFactory.instantiate(row.data) as Catalogue)
+                .filter(catalogue => catalogue.kind !== 'PURCHASE');
+            const found = catalogues
+                .flatMap(catalogue => catalogue.recipes)
                 .find(recipe => recipe.ingredients.length > 0 && recipe.ingredients.every(ing => (available[ing.referenceKey] ?? 0) >= ing.quantity));
             setMatchedRecipe(found ?? null);
         }, RECIPE_SEARCH_DEBOUNCE_MS);
@@ -99,7 +103,7 @@ const CraftSection: React.FC<Props> = ({ character, customization, onChange }) =
         onChange();
     };
 
-    const stageTransfer = (target: 'workbench' | 'pocket', source: WorkbenchDragSource, pos: { x: number; y: number }) => {
+    const stageTransfer = (target: 'workbench' | 'pocket', source: WorkbenchDragSource, pos: Anchor) => {
         let inst = null;
         if (source.kind === 'pocket') inst = inventory.pocket.slots[source.slot];
         else if (source.kind === 'container') inst = containerStorage?.slots[source.slot] ?? null;
@@ -109,7 +113,7 @@ const CraftSection: React.FC<Props> = ({ character, customization, onChange }) =
         setPendingTransfer({ target, source, name: inst.reference.name, available: inst.currentStack, quantity: inst.currentStack, pos });
     };
 
-    const handleDropOnWorkbench = (pos: { x: number; y: number }) => {
+    const handleDropOnWorkbench = (pos: Anchor) => {
         const source = dragSourceRef.current;
         dragSourceRef.current = null;
         if (!source || source.kind === 'workbench') return;
@@ -117,7 +121,7 @@ const CraftSection: React.FC<Props> = ({ character, customization, onChange }) =
         stageTransfer('workbench', source, pos);
     };
 
-    const handleDropOnPocket = (pos: { x: number; y: number }) => {
+    const handleDropOnPocket = (pos: Anchor) => {
         const source = dragSourceRef.current;
         dragSourceRef.current = null;
         if (!source || source.kind !== 'workbench') return;
@@ -145,7 +149,7 @@ const CraftSection: React.FC<Props> = ({ character, customization, onChange }) =
                     onDragOver={e => { if (customization && dragSourceRef.current && dragSourceRef.current.kind !== 'workbench') { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; } }}
                     onDragEnter={e => { if (customization && dragSourceRef.current && dragSourceRef.current.kind !== 'workbench') { e.preventDefault(); setIngredientsDragOver(true); } }}
                     onDragLeave={() => setIngredientsDragOver(false)}
-                    onDrop={e => { e.preventDefault(); setIngredientsDragOver(false); if (customization) handleDropOnWorkbench({ x: e.clientX, y: e.clientY }); }}
+                    onDrop={e => { e.preventDefault(); setIngredientsDragOver(false); if (customization) handleDropOnWorkbench({ top: e.clientY, bottom: e.clientY, left: e.clientX, right: e.clientX }); }}
                 >
                     {inventory.workbench.content.map((inst, i) => (
                         <RecipeSlot
@@ -203,7 +207,7 @@ const CraftSection: React.FC<Props> = ({ character, customization, onChange }) =
         </div>
 
         {pendingTransfer && (
-            <div className={sharedStyles.recipeQuantityPanel} style={{ left: pendingTransfer.pos.x, top: pendingTransfer.pos.y }} ref={pendingTransferRef}>
+            <div className={sharedStyles.recipeQuantityPanel} style={pendingTransferStyle} ref={pendingTransferRef}>
                 <div className={sharedStyles.recipeQuantityName}>{pendingTransfer.name}</div>
                 <div className={sharedStyles.recipeQuantityControls}>
                     <button onClick={() => setPendingTransfer(p => p && ({ ...p, quantity: Math.max(1, p.quantity - 1) }))}>−</button>
@@ -223,7 +227,7 @@ const CraftSection: React.FC<Props> = ({ character, customization, onChange }) =
                 onDragOver={e => { if (customization && dragSourceRef.current?.kind === 'workbench') { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; } }}
                 onDragEnter={e => { if (customization && dragSourceRef.current?.kind === 'workbench') { e.preventDefault(); setPocketDragOver(true); } }}
                 onDragLeave={() => setPocketDragOver(false)}
-                onDrop={e => { e.preventDefault(); setPocketDragOver(false); if (customization) handleDropOnPocket({ x: e.clientX, y: e.clientY }); }}
+                onDrop={e => { e.preventDefault(); setPocketDragOver(false); if (customization) handleDropOnPocket({ top: e.clientY, bottom: e.clientY, left: e.clientX, right: e.clientX }); }}
             >
                 {chunk(inventory.pocket.slots, POCKET_ROW_SIZE).map((row, rowIndex) => (
                     <div className={styles.slotRow} key={rowIndex}>

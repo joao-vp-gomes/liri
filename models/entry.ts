@@ -4,7 +4,7 @@
 import { generateKey } from "./utils/key";
 
 
-export type EntryCategory = 'ENTRY' | 'CHARACTER' | 'ITEM' | 'ABILITY' | 'RECIPE';
+export type EntryCategory = 'ENTRY' | 'CHARACTER' | 'ITEM' | 'ABILITY' | 'CATALOGUE';
 export class Entry {
 
     public key: string;

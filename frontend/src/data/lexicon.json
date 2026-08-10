@@ -854,5 +854,13 @@
     "cooking": {
         "en": "cooking",
         "pt": "culinária"
+    },
+    "purchase": {
+        "en": "purchase",
+        "pt": "compra"
+    },
+    "recipes": {
+        "en": "recipes",
+        "pt": "receitas"
     }
 }
