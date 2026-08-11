@@ -151,7 +151,7 @@ const RecipeSlot: React.FC<Props> = ({ image, name, quantity, editable, onRemove
                                         <input
                                             className={styles.modifierNameInput}
                                             value={quirk.name}
-                                            onChange={e => updateQuirk(quirkIndex, { name: e.target.value })}
+                                            onChange={e => updateQuirk(quirkIndex, { name: e.target.value.toUpperCase() })}
                                             placeholder={t({ text: 'name', language, mode: 'UPPERCASE' })}
                                         />
                                     ) : <div className={styles.modifierNameDisplay}>{quirk.name || '—'}</div>}
@@ -160,7 +160,7 @@ const RecipeSlot: React.FC<Props> = ({ image, name, quantity, editable, onRemove
                                         <textarea
                                             className={styles.modifierDescInput}
                                             value={quirk.description || ''}
-                                            onChange={e => updateQuirk(quirkIndex, { description: e.target.value })}
+                                            onChange={e => updateQuirk(quirkIndex, { description: e.target.value.toUpperCase() })}
                                             placeholder={t({ text: 'description', language, mode: 'PLAIN_FIRST_UPPER' })}
                                         />
                                     ) : <div className={styles.modifierDescDisplay}>{quirk.description || '—'}</div>}
@@ -172,7 +172,7 @@ const RecipeSlot: React.FC<Props> = ({ image, name, quantity, editable, onRemove
                                                     <input
                                                         className={styles.effectIdentifierInput}
                                                         value={effect.identifier}
-                                                        onChange={e => updateQuirkEffect(quirkIndex, effectIndex, { identifier: e.target.value })}
+                                                        onChange={e => updateQuirkEffect(quirkIndex, effectIndex, { identifier: e.target.value.toUpperCase() })}
                                                         placeholder={t({ text: 'identifier', language, mode: 'LOWERCASE' })}
                                                     />
                                                     <select

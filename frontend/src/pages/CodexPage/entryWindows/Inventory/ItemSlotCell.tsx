@@ -85,8 +85,13 @@ const ItemSlotCell: React.FC<Props> = ({
     const scheduleCloseExpand = () => {
         closeTimerRef.current = setTimeout(() => setExpanded(false), 150);
     };
+    const closeExpandNow = () => {
+        if (closeTimerRef.current) { clearTimeout(closeTimerRef.current); closeTimerRef.current = null; }
+        setExpanded(false);
+    };
 
     const handleClick = () => {
+        closeExpandNow();
         if (!customization) {
             if (reference) navigate(`/codex?m=vis&e=${encodeURIComponent(reference.key)}`);
             return;
@@ -143,7 +148,7 @@ const ItemSlotCell: React.FC<Props> = ({
                 className={`${styles.slotCell}${isDragOver ? ` ${styles.slotCellDragOver}` : ''}`}
                 onClick={handleClick}
                 draggable={customization && !!draggable}
-                onDragStart={e => { if (!customization) { e.preventDefault(); return; } e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'liri-slot'); onDragStart?.(); }}
+                onDragStart={e => { if (!customization) { e.preventDefault(); return; } closeExpandNow(); e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'liri-slot'); onDragStart?.(); }}
                 onDragOver={e => { if (customization && onDropHere) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; } }}
                 onDragEnter={e => { if (customization && onDropHere) { e.preventDefault(); setIsDragOver(true); } }}
                 onDragLeave={() => setIsDragOver(false)}
@@ -204,7 +209,7 @@ const ItemSlotCell: React.FC<Props> = ({
                                         <input
                                             className={sharedStyles.modifierNameInput}
                                             value={quirk.name}
-                                            onChange={e => updateQuirk(quirkIndex, { name: e.target.value })}
+                                            onChange={e => updateQuirk(quirkIndex, { name: e.target.value.toUpperCase() })}
                                             placeholder={t({ text: 'name', language, mode: 'UPPERCASE' })}
                                         />
                                     ) : <div className={sharedStyles.modifierNameDisplay}>{quirk.name || '—'}</div>}
@@ -213,7 +218,7 @@ const ItemSlotCell: React.FC<Props> = ({
                                         <textarea
                                             className={sharedStyles.modifierDescInput}
                                             value={quirk.description || ''}
-                                            onChange={e => updateQuirk(quirkIndex, { description: e.target.value })}
+                                            onChange={e => updateQuirk(quirkIndex, { description: e.target.value.toUpperCase() })}
                                             placeholder={t({ text: 'description', language, mode: 'PLAIN_FIRST_UPPER' })}
                                         />
                                     ) : <div className={sharedStyles.modifierDescDisplay}>{quirk.description || '—'}</div>}
@@ -225,7 +230,7 @@ const ItemSlotCell: React.FC<Props> = ({
                                                     <input
                                                         className={sharedStyles.effectIdentifierInput}
                                                         value={effect.identifier}
-                                                        onChange={e => updateQuirkEffect(quirkIndex, effectIndex, { identifier: e.target.value })}
+                                                        onChange={e => updateQuirkEffect(quirkIndex, effectIndex, { identifier: e.target.value.toUpperCase() })}
                                                         placeholder={t({ text: 'identifier', language, mode: 'LOWERCASE' })}
                                                     />
                                                     <select

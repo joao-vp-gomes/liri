@@ -3,6 +3,7 @@
 
 
 import { Breakable, Container, Item } from "../item";
+import { ItemFactory } from "../itemFactory";
 import type { Modifier } from "./modifier";
 import { FiniteStorage } from "./storage";
 
@@ -23,10 +24,10 @@ export class ItemInstance {
             this.quirks = new Array<Modifier>();
             this.storage = (source instanceof Container) ? new FiniteStorage(undefined, source.size) : null;
         } else {
-            this.reference = source.reference;
+            this.reference = source.reference instanceof Item ? source.reference : ItemFactory.instantiate(source.reference);
             this.currentStack = source.currentStack;
             this.currentDurability = source.currentDurability;
-            this.quirks = [...source.quirks];
+            this.quirks = source.quirks ? [...source.quirks] : [];
             this.storage = source.storage ? new FiniteStorage(source.storage) : null;
         }
     }

@@ -40,11 +40,6 @@ export async function sync(character: Character): Promise<Character> {
         if (!refreshed) character.inventory.vault.content.splice(i, 1);
     }
 
-    for (let i = character.inventory.workbench.content.length - 1; i >= 0; i--) {
-        const refreshed = await refreshItem(character.inventory.workbench.content[i]);
-        if (!refreshed) character.inventory.workbench.content.splice(i, 1);
-    }
-
     for (let i = 0; i < character.grimmoire.slots.length; i++) {
         const inst = character.grimmoire.slots[i] as AbilityInstance | null;
         if (!inst) continue;

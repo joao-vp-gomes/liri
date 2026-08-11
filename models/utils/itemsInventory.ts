@@ -4,23 +4,60 @@
 import { ItemInstance } from "./itemInstance";
 import { Equipment } from "./equipment";
 import { FiniteStorage, InfiniteStorage } from "./storage";
-import type { Ingredient } from "./ingredient";
+import { Breakable } from "../item";
 
 
 const POCKET_SIZE = 12;
+
+export type SourceLocation =
+    | { type: 'pocket'; slot: number }
+    | { type: 'container'; slot: number }
+    | { type: 'equipment'; slot: keyof typeof Equipment.EQUIPMENT_SLOTS };
+
+export const sameLocation = (a: SourceLocation | null, b: SourceLocation | null): boolean =>
+    !!a && !!b && a.type === b.type && a.slot === b.slot;
 
 export class ItemsInventory {
 
     public pocket: FiniteStorage;
     public vault: InfiniteStorage;
     public equipment: Equipment;
-    public workbench: InfiniteStorage;
 
     constructor(source?: ItemsInventory) {
         this.pocket = new FiniteStorage(source?.pocket, POCKET_SIZE);
         this.vault = source?.vault ? new InfiniteStorage(source.vault) : new InfiniteStorage();
         this.equipment = source?.equipment ? new Equipment(source.equipment) : new Equipment();
-        this.workbench = source?.workbench ? new InfiniteStorage(source.workbench) : new InfiniteStorage();
+    }
+
+    peekAtLocation(location: SourceLocation): ItemInstance | null {
+        if (location.type === 'pocket') return this.pocket.slots[location.slot] ?? null;
+        if (location.type === 'container') return this.equipment.container?.storage?.slots[location.slot] ?? null;
+        return this.equipment.getEquipment(location.slot);
+    }
+
+    removeFromLocation(location: SourceLocation, quantity: number): ItemInstance | null {
+        if (location.type === 'pocket') return this.pocket.removeBySlot(location.slot, quantity);
+        if (location.type === 'container') {
+            const container = this.equipment.container?.storage ?? null;
+            return container ? container.removeBySlot(location.slot, quantity) : null;
+        }
+        return this.equipment.clearEquipment(location.slot);
+    }
+
+    craftFromLocations(consumptions: Array<{ location: SourceLocation; quantity: number }>, products: Array<ItemInstance>): void {
+        consumptions.forEach(consumption => this.removeFromLocation(consumption.location, consumption.quantity));
+        products.forEach(product => this.environmentToPocket(new ItemInstance(product)));
+    }
+
+    repairAtLocation(itemLocation: SourceLocation, materialLocation: SourceLocation, repairFactor: number): void {
+        const itemInstance = this.peekAtLocation(itemLocation);
+        if (!itemInstance || itemInstance.currentDurability === null) return;
+        if (!(itemInstance.reference instanceof Breakable)) return;
+        const maxDurability = itemInstance.reference.durability;
+        if (maxDurability === null || maxDurability === -1) return;
+
+        itemInstance.currentDurability = Math.min(maxDurability, itemInstance.currentDurability + repairFactor);
+        this.removeFromLocation(materialLocation, 1);
     }
 
     environmentToPocket(itemToAdd: ItemInstance, slot?: number): void {
@@ -120,31 +157,6 @@ export class ItemsInventory {
     }
     equipmentToEnvironment(equipmentSlot: keyof typeof Equipment.EQUIPMENT_SLOTS): void {
         this.equipment.clearEquipment(equipmentSlot);
-    }
-
-    pocketToWorkbench(slot: number, quantity: number): void {
-        this.workbench.add(this.pocket.removeBySlot(slot, quantity));
-    }
-    workbenchToPocket(index: number, quantity: number): void {
-        const excedent = this.pocket.add(this.workbench.removeByIndex(index, quantity));
-        if (excedent) this.workbench.add(excedent);
-    }
-    containerToWorkbench(slot: number, quantity: number): void {
-        const containerSlot = this.equipment.container;
-        if (containerSlot === null) return;
-        const container = containerSlot.storage;
-        if (container === null) return;
-
-        this.workbench.add(container.removeBySlot(slot, quantity));
-    }
-
-    craft(ingredients: Array<Ingredient>, products: Array<ItemInstance>): void {
-        for (const ingredient of ingredients) {
-            this.workbench.removeByKey(ingredient.referenceKey, ingredient.quantity);
-        }
-        for (const product of products) {
-            this.environmentToPocket(new ItemInstance(product));
-        }
     }
 
     containerToPocket(fromSlot: number, toSlot: number): void {

@@ -115,7 +115,7 @@ const AbilityWindow: React.FC<Props> = ({ ability: initialAbility, customization
             <input
                 className={styles.nameInput}
                 value={ability.name || ''}
-                onChange={e => { ability.name = e.target.value; update(); }}
+                onChange={e => { ability.name = e.target.value.toUpperCase(); update(); }}
                 placeholder={t({ text: 'name', language, mode: 'UPPERCASE' })}
             />
         ) : (<div className={styles.nameDisplay}>{ability.name || '—'}</div>)
@@ -127,7 +127,7 @@ const AbilityWindow: React.FC<Props> = ({ ability: initialAbility, customization
             <textarea
                 className={styles.descriptionInput}
                 value={ability.description || ''}
-                onChange={e => { ability.description = e.target.value; update(); }}
+                onChange={e => { ability.description = e.target.value.toUpperCase(); update(); }}
                 placeholder={t({ text: 'description', language, mode: 'PLAIN_FIRST_UPPER' })}
             />
         ) : (<div className={styles.descriptionDisplay}>{ability.description || '—'}</div>)
@@ -201,7 +201,7 @@ const AbilityWindow: React.FC<Props> = ({ ability: initialAbility, customization
                         autoFocus
                         className={styles.tagInput}
                         value={tempTag}
-                        onChange={e => setTempTag(e.target.value)}
+                        onChange={e => setTempTag(e.target.value.toUpperCase())}
                         onBlur={() => { if(tempTag.trim()) { ability.tags.push(tempTag.trim()); update(); } setIsAddingTag(false); setTempTag(''); }}
                         onKeyDown={e => { if(e.key === 'Enter') e.currentTarget.blur(); if(e.key === 'Escape') { setTempTag(''); setIsAddingTag(false); } }}
                     />
@@ -366,13 +366,13 @@ const AbilityWindow: React.FC<Props> = ({ ability: initialAbility, customization
                     <div key={traitIndex} className={styles.modifierCard}>
                         {customization ? (
                             <input className={styles.modifierNameInput} value={trait.name}
-                                onChange={e => { ability.traits[traitIndex].name = e.target.value; update(); }}
+                                onChange={e => { ability.traits[traitIndex].name = e.target.value.toUpperCase(); update(); }}
                                 placeholder={t({ text: 'name', language, mode: 'UPPERCASE' })} />
                         ) : <div className={styles.modifierNameDisplay}>{trait.name || '—'}</div>}
 
                         {customization ? (
                             <textarea className={styles.modifierDescInput} value={trait.description || ''}
-                                onChange={e => { ability.traits[traitIndex].description = e.target.value; update(); }}
+                                onChange={e => { ability.traits[traitIndex].description = e.target.value.toUpperCase(); update(); }}
                                 placeholder={t({ text: 'description', language, mode: 'PLAIN_FIRST_UPPER' })} />
                         ) : <div className={styles.modifierDescDisplay}>{trait.description || '—'}</div>}
 
@@ -382,7 +382,7 @@ const AbilityWindow: React.FC<Props> = ({ ability: initialAbility, customization
                                     <div key={effectIndex} className={styles.effectRow}>
 
                                         <input className={styles.effectIdentifierInput} value={effect.identifier}
-                                            onChange={e => { ability.traits[traitIndex].effects[effectIndex].identifier = e.target.value; update(); }}
+                                            onChange={e => { ability.traits[traitIndex].effects[effectIndex].identifier = e.target.value.toUpperCase(); update(); }}
                                             placeholder={t({ text: 'identifier', language: language, mode: 'LOWERCASE'})} />
 
                                         <select className={styles.effectKindSelect} value={effect.mode}

@@ -226,7 +226,7 @@ const PawnWindow: React.FC<Props> = ({ pawn: initialPawn, customization, isNew, 
             <input
                 className={styles.nameInput}
                 value={pawn.name || ''}
-                onChange={e => { pawn.name = e.target.value; update(); }}
+                onChange={e => { pawn.name = e.target.value.toUpperCase(); update(); }}
                 placeholder={t({ text: 'name', language, mode: 'UPPERCASE' })}
             />
         ) : (<div className={styles.nameDisplay}>{pawn.name || '—'}</div>)
@@ -238,7 +238,7 @@ const PawnWindow: React.FC<Props> = ({ pawn: initialPawn, customization, isNew, 
             <textarea
                 className={styles.descriptionInput}
                 value={pawn.description || ''}
-                onChange={e => { pawn.description = e.target.value; update(); }}
+                onChange={e => { pawn.description = e.target.value.toUpperCase(); update(); }}
                 placeholder={t({ text: 'description', language, mode: 'PLAIN_FIRST_UPPER' })}
             />
         ) : (<div className={styles.descriptionDisplay}>{pawn.description || '—'}</div>)
@@ -312,7 +312,7 @@ const PawnWindow: React.FC<Props> = ({ pawn: initialPawn, customization, isNew, 
                         autoFocus
                         className={styles.tagInput}
                         value={tempTag}
-                        onChange={e => setTempTag(e.target.value)}
+                        onChange={e => setTempTag(e.target.value.toUpperCase())}
                         onBlur={() => { if(tempTag.trim()) { pawn.tags.push(tempTag.trim()); update(); } setIsAddingTag(false); setTempTag(''); }}
                         onKeyDown={e => { if(e.key === 'Enter') e.currentTarget.blur(); if(e.key === 'Escape') { setTempTag(''); setIsAddingTag(false); } }}
                     />
@@ -404,7 +404,7 @@ const PawnWindow: React.FC<Props> = ({ pawn: initialPawn, customization, isNew, 
                                 <input
                                     className={styles.modifierNameInput}
                                     value={action.name}
-                                    onChange={e => { pawn.actions[actionIndex].name = e.target.value; update(); }}
+                                    onChange={e => { pawn.actions[actionIndex].name = e.target.value.toUpperCase(); update(); }}
                                     placeholder={t({ text: 'name', language, mode: 'UPPERCASE' })}
                                 />
                             ) : <div className={styles.modifierNameDisplay}>{action.name || '—'}</div>}
@@ -413,7 +413,7 @@ const PawnWindow: React.FC<Props> = ({ pawn: initialPawn, customization, isNew, 
                                 <textarea
                                     className={styles.modifierDescInput}
                                     value={action.description || ''}
-                                    onChange={e => { pawn.actions[actionIndex].description = e.target.value; update(); }}
+                                    onChange={e => { pawn.actions[actionIndex].description = e.target.value.toUpperCase(); update(); }}
                                     placeholder={t({ text: 'description', language, mode: 'PLAIN_FIRST_UPPER' })}
                                 />
                             ) : <div className={styles.modifierDescDisplay}>{action.description || '—'}</div>}

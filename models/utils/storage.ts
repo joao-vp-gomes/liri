@@ -17,8 +17,8 @@ export class FiniteStorage {
         this.slots = new Array<ItemInstance | null>(this.size).fill(null);
         if (source) {
             source.slots.forEach((slot, i) => {
-                if (i < this.size) this.slots[i] = slot ? {...slot} : null; 
-                else this.add(slot ? {...slot} : null); 
+                if (i < this.size) this.slots[i] = slot ? new ItemInstance(slot) : null;
+                else this.add(slot ? new ItemInstance(slot) : null);
             });
         }
     }
@@ -126,7 +126,7 @@ export class InfiniteStorage {
     public content = new Array<ItemInstance>();
 
     constructor(source?: InfiniteStorage) {
-        source?.content.forEach((item, _i) => this.add(item))
+        source?.content.forEach(item => this.add(new ItemInstance(item)))
     }
 
     add(itemInstance: ItemInstance | null): void {

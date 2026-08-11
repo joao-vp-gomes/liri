@@ -26,6 +26,66 @@
 }
 
 
+.tableSwitcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.tableSwitcherArrow {
+    background: none;
+    border: none;
+    color: var(--stroke-color-low);
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.15s, transform 0.15s;
+}
+.tableSwitcherArrow:hover { color: var(--accent-color); transform: scale(1.2); }
+
+.tableSwitcherLabel {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--stroke-color-high);
+    width: 140px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.repairSlots {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+}
+
+.repairBtnRow {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.repairBtn {
+    background: var(--accent-color);
+    border: none;
+    color: var(--fill-color-dark);
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    padding: 8px 24px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, opacity 0.15s;
+}
+.repairBtn:hover:not(:disabled) { background: var(--accent-color-dark); }
+.repairBtn:disabled { opacity: 0.35; cursor: default; }
+
+
 .slotRows {
     display: flex;
     flex-direction: column;

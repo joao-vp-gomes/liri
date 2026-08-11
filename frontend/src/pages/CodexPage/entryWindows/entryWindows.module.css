@@ -1011,6 +1011,47 @@
 }
 .craftCompetenceInfoUnmet { color: var(--red-color-light); }
 
+.craftArrowGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.recipeArrowSpacer { visibility: hidden; }
+
+.recipeArrowCell {
+    height: 64px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.recipeArrowCell .recipeArrow { margin-top: 0; }
+
+.craftFlowTight .recipeGroup { flex: 0 0 auto; min-width: 0; }
+.craftFlowCenter { justify-content: center; }
+
+.craftArrowIdle { color: var(--accent-color-dark); }
+.craftArrowActive {
+    background: none;
+    border: none;
+    font-family: inherit;
+    color: var(--accent-color);
+    cursor: pointer;
+}
+.craftArrowActive:hover { transform: scale(1.2); }
+
+.craftDifficultyInfo {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--accent-color);
+    text-align: center;
+    margin-top: 6px;
+}
+
 .recipeSlotWrapper {
     position: relative;
     display: flex;
@@ -1191,6 +1232,13 @@
     gap: 16px;
     margin-top: 16px;
     flex-wrap: wrap;
+}
+
+.craftingGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 64px);
+    gap: 10px;
+    padding: 4px;
 }
 
 .dropRowsList {

@@ -168,7 +168,7 @@ const ItemWindow: React.FC<Props> = ({ item: initialItem, customization, isNew, 
             <input
                 className={styles.nameInput}
                 value={item.name || ''}
-                onChange={e => { item.name = e.target.value; update(); }}
+                onChange={e => { item.name = e.target.value.toUpperCase(); update(); }}
                 placeholder={t({ text: 'name', language, mode: 'UPPERCASE' })}
             />
         ) : (<div className={styles.nameDisplay}>{item.name || '—'}</div>)
@@ -180,7 +180,7 @@ const ItemWindow: React.FC<Props> = ({ item: initialItem, customization, isNew, 
             <textarea
                 className={styles.descriptionInput}
                 value={item.description || ''}
-                onChange={e => { item.description = e.target.value; update(); }}
+                onChange={e => { item.description = e.target.value.toUpperCase(); update(); }}
                 placeholder={t({ text: 'description', language, mode: 'PLAIN_FIRST_UPPER' })}
             />
         ) : (<div className={styles.descriptionDisplay}>{item.description || '—'}</div>)
@@ -254,7 +254,7 @@ const ItemWindow: React.FC<Props> = ({ item: initialItem, customization, isNew, 
                         autoFocus
                         className={styles.tagInput}
                         value={tempTag}
-                        onChange={e => setTempTag(e.target.value)}
+                        onChange={e => setTempTag(e.target.value.toUpperCase())}
                         onBlur={() => { if(tempTag.trim()) { item.tags.push(tempTag.trim()); update(); } setIsAddingTag(false); setTempTag(''); }}
                         onKeyDown={e => { if(e.key === 'Enter') e.currentTarget.blur(); if(e.key === 'Escape') { setTempTag(''); setIsAddingTag(false); } }}
                     />
@@ -409,7 +409,7 @@ const ItemWindow: React.FC<Props> = ({ item: initialItem, customization, isNew, 
                                         <button onClick={() => setRepairFactor(breakable, i, comp.repairFactor + 1)}>&gt;</button>
                                     </div>
                                 ) : (
-                                    <div className={styles.fieldValueDisplay}>{`< ${comp.repairFactor} >`}</div>
+                                    <div className={styles.fieldValueDisplay}>{comp.repairFactor}</div>
                                 )}
                             </div>
                         );
@@ -432,13 +432,13 @@ const ItemWindow: React.FC<Props> = ({ item: initialItem, customization, isNew, 
                         <div key={traitIndex} className={styles.modifierCard}>
                             {customization ? (
                                 <input className={styles.modifierNameInput} value={trait.name}
-                                    onChange={e => { equipable.traits[traitIndex].name = e.target.value; update(); }}
+                                    onChange={e => { equipable.traits[traitIndex].name = e.target.value.toUpperCase(); update(); }}
                                     placeholder={t({ text: 'name', language, mode: 'UPPERCASE' })} />
                             ) : <div className={styles.modifierNameDisplay}>{trait.name || '—'}</div>}
 
                             {customization ? (
                                 <textarea className={styles.modifierDescInput} value={trait.description || ''}
-                                    onChange={e => { equipable.traits[traitIndex].description = e.target.value; update(); }}
+                                    onChange={e => { equipable.traits[traitIndex].description = e.target.value.toUpperCase(); update(); }}
                                     placeholder={t({ text: 'description', language, mode: 'PLAIN_FIRST_UPPER' })} />
                             ) : <div className={styles.modifierDescDisplay}>{trait.description || '—'}</div>}
 
@@ -448,7 +448,7 @@ const ItemWindow: React.FC<Props> = ({ item: initialItem, customization, isNew, 
                                         <div key={effectIndex} className={styles.effectRow}>
 
                                             <input className={styles.effectIdentifierInput} value={effect.identifier}
-                                                onChange={e => { equipable.traits[traitIndex].effects[effectIndex].identifier = e.target.value; update(); }}
+                                                onChange={e => { equipable.traits[traitIndex].effects[effectIndex].identifier = e.target.value.toUpperCase(); update(); }}
                                                 placeholder={t({ text: 'identifier', language: language, mode: 'LOWERCASE'})} />
 
                                             <select className={styles.effectKindSelect} value={effect.mode}

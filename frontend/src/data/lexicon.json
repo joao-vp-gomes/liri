@@ -906,5 +906,17 @@
     "unique": {
         "en": "unique",
         "pt": "único"
+    },
+    "difficulty": {
+        "en": "difficulty",
+        "pt": "dificuldade"
+    },
+    "repair": {
+        "en": "repair",
+        "pt": "reparar"
+    },
+    "product": {
+        "en": "product",
+        "pt": "produto"
     }
 }

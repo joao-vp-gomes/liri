@@ -2,7 +2,6 @@
 
 
 import { ItemInstance } from "./itemInstance";
-import { FiniteStorage } from "./storage";
 
 
 export class Equipment {
@@ -24,14 +23,24 @@ export class Equipment {
      } as const;
 
     constructor(source?: Equipment) {
-        this.apparel = source?.apparel ? {...source.apparel} : null;
-        this.rightHand = source?.rightHand ? {...source.rightHand} : null;
-        this.leftHand = source?.leftHand ? {...source.leftHand} : null;
-        this.accessory1 = source?.accessory1 ? {...source.accessory1} : null;
-        this.accessory2 = source?.accessory2 ? {...source.accessory2} : null;
-        this.container = source?.container
-            ? { ...source.container, storage: source.container.storage ? new FiniteStorage(source.container.storage) : null }
-            : null;
+        this.apparel = source?.apparel ? new ItemInstance(source.apparel) : null;
+        this.rightHand = source?.rightHand ? new ItemInstance(source.rightHand) : null;
+        this.leftHand = source?.leftHand ? new ItemInstance(source.leftHand) : null;
+        this.accessory1 = source?.accessory1 ? new ItemInstance(source.accessory1) : null;
+        this.accessory2 = source?.accessory2 ? new ItemInstance(source.accessory2) : null;
+        this.container = source?.container ? new ItemInstance(source.container) : null;
+    }
+
+    getEquipment(slot: keyof typeof Equipment.EQUIPMENT_SLOTS): ItemInstance | null {
+        switch (slot) {
+            case 'APPAREL': return this.apparel;
+            case 'RIGHT_HAND': return this.rightHand;
+            case 'LEFT_HAND': return this.leftHand;
+            case 'ACCESSORY_1': return this.accessory1;
+            case 'ACCESSORY_2': return this.accessory2;
+            case 'CONTAINER': return this.container;
+            default: return null;
+        }
     }
 
     setEquipment(slot: keyof typeof Equipment.EQUIPMENT_SLOTS, itemInstance: ItemInstance | null): ItemInstance | null {
