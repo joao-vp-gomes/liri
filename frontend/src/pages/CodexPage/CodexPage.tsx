@@ -18,11 +18,13 @@ import type { Item } from '../../../../models/item.ts';
 import { ItemFactory } from '../../../../models/itemFactory.ts';
 import { Character } from '../../../../models/character.ts';
 import { Catalogue } from '../../../../models/catalogue.ts';
+import { Pawn } from '../../../../models/pawn.ts';
 
 import AbilityWindow from './entryWindows/AbilityWindow.tsx';
 import ItemWindow from './entryWindows/ItemWindow.tsx';
 import CharacterWindow from './entryWindows/CharacterWindow.tsx';
 import CatalogueWindow from './entryWindows/CatalogueWindow.tsx';
+import PawnWindow from './entryWindows/PawnWindow.tsx';
 
 import styles from './CodexPage.module.css';
 
@@ -40,7 +42,7 @@ const MAX_RECENT = 12;
 const DEBOUNCE_MS = 300;
 export const AUTOSAVE_DELAY = 300;
 export const ALL_CATEGORIES: EntryCategory[] = [
-    'CHARACTER', 'ABILITY', 'ITEM', 'CATALOGUE'
+    'CHARACTER', 'ABILITY', 'ITEM', 'CATALOGUE', 'PAWN'
 ];
 
 const loadRecent = (): EntryBio[] => {
@@ -299,6 +301,7 @@ const CodexPage: React.FC<Props> = ({ initialMode = 'vis', showSwitch = true }) 
             case 'ITEM': return ItemFactory.instantiate(pageEntry);
             case 'CHARACTER': return new Character(pageEntry as any);
             case 'CATALOGUE': return new Catalogue(pageEntry as any);
+            case 'PAWN': return new Pawn(pageEntry as any);
             default: return null;
         }
     }, [pageEntry]);
@@ -321,6 +324,7 @@ const CodexPage: React.FC<Props> = ({ initialMode = 'vis', showSwitch = true }) 
             case 'ITEM': return <ItemWindow item={typedPageEntry as Item} {...commonProps} />;
             case 'CHARACTER': return <CharacterWindow character={typedPageEntry as Character} {...commonProps} />;
             case 'CATALOGUE': return <CatalogueWindow catalogue={typedPageEntry as Catalogue} {...commonProps} />;
+            case 'PAWN': return <PawnWindow pawn={typedPageEntry as Pawn} {...commonProps} />;
             default: return null;
         }
 

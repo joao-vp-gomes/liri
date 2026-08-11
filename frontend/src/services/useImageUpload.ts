@@ -8,6 +8,7 @@ import itemImage from '../images/item.png';
 import abilityImage from '../images/ability.png';
 import recipeImage from '../images/recipe.png';
 import characterImage from '../images/character.png';
+import pawnImage from '../images/pawn.png';
 
 
 const MAX_SIZE_BYTES = 5 * 1024 * 1024; // 5MB
@@ -25,6 +26,7 @@ export const getImageUrl = (imagePath: string | null | undefined, category: Entr
         case 'ITEM': return itemImage;
         case 'ABILITY': return abilityImage;
         case 'CATALOGUE': return recipeImage;
+        case 'PAWN': return pawnImage;
         default: return itemImage;
     }
 

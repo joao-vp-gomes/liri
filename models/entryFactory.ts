@@ -5,6 +5,7 @@ import { Entry, type EntryCategory } from "./entry.ts";
 import { Character } from "./character.ts";
 import { Ability } from "./ability.ts";
 import { Catalogue } from "./catalogue.ts";
+import { Pawn } from "./pawn.ts";
 import { ItemFactory } from "./itemFactory.ts";
 
 
@@ -14,7 +15,8 @@ export class EntryFactory {
         'ENTRY': Entry,
         'CHARACTER': Character,
         'ABILITY': Ability,
-        'CATALOGUE': Catalogue
+        'CATALOGUE': Catalogue,
+        'PAWN': Pawn
     };
 
     public static instantiate(data: any): Entry {

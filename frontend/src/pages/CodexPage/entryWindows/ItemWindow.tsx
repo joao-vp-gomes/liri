@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { t } from '../../../utils/localizer';
-import { dbRegister, dbDeregister } from '../../../services/database';
+import { dbFetch, dbRegister, dbDeregister } from '../../../services/database';
 import { Item, Equipable, Breakable, Weapon, Tool, Apparel, Container, Consumable, Material, type ItemKind } from '../../../../../models/item.ts';
 import { ItemFactory } from '../../../../../models/itemFactory.ts';
 import type { EntryCategory } from '../../../../../models/entry.ts';
@@ -12,6 +12,7 @@ import type { Aspect } from '../../../../../models/utils/aspect.ts';
 import { getImageUrl, useImageUpload } from '../../../services/useImageUpload';
 import FloatingSearch from '../../../components/FloatingSearch/FloatingSearch';
 import NumberFieldCard from './NumberFieldCard';
+import { useClampedPosition, type Anchor } from '../../../utils/useClampedPosition';
 import { ALL_CATEGORIES, AUTOSAVE_DELAY } from '../CodexPage';
 
 import styles from './entryWindows.module.css';
@@ -33,6 +34,40 @@ const ASPECT_FIELDS: (keyof Aspect)[] = ['slash', 'pierce', 'bludgeon', 'arcane'
 
 const instantiateItem = (kind: ItemKind, source: Partial<Item>): Item => ItemFactory.instantiateAs(kind, source);
 
+const AddCompositionSlot: React.FC<{ onAdd: (key: string) => void; searchPlaceholder: string }> = ({ onAdd, searchPlaceholder }) => {
+
+    const [open, setOpen] = useState(false);
+    const [pos, setPos] = useState<Anchor | null>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const { ref: searchRef, style: searchStyle } = useClampedPosition(open ? pos : null);
+
+    const openSearch = () => {
+        const rect = wrapperRef.current?.getBoundingClientRect();
+        setPos(rect ? { top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right } : { top: 0, bottom: 0, left: 0, right: 0 });
+        setOpen(true);
+    };
+
+    return (
+        <div className={styles.recipeSlotWrapper} ref={wrapperRef}>
+            <div className={styles.recipeAddCell} onClick={openSearch}>
+                <span className={styles.recipeAddPlus}>+</span>
+            </div>
+
+            {open && pos && (
+                <div className={styles.recipeSearchAnchor} style={searchStyle} ref={searchRef}>
+                    <FloatingSearch
+                        categories={['ITEM']}
+                        onSelect={result => { onAdd(result.key); setOpen(false); }}
+                        onClose={() => setOpen(false)}
+                        placeholder={searchPlaceholder}
+                    />
+                </div>
+            )}
+        </div>
+    );
+
+};
+
 const ItemWindow: React.FC<Props> = ({ item: initialItem, customization, isNew, onCategoryChange, onSaved, onDeleted, onDirtyChange }) => {
 
     const { language } = useLanguage();
@@ -45,14 +80,16 @@ const ItemWindow: React.FC<Props> = ({ item: initialItem, customization, isNew, 
     const [kindOpen, setKindOpen] = useState(false);
     const [isAddingTag, setIsAddingTag] = useState(false);
     const [tempTag, setTempTag] = useState('');
-    const [compositionSearchOpen, setCompositionSearchOpen] = useState(false);
-    const [compositionNames, setCompositionNames] = useState<Record<string, string>>({});
+    const [compositionCache, setCompositionCache] = useState<Record<string, Item>>({});
 
     const autosaveRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const isDirtyRef = useRef(false);
     const isFirstRender = useRef(true);
     const categoryRef = useRef<HTMLDivElement>(null);
     const kindRef = useRef<HTMLDivElement>(null);
+    const itemRef = useRef(item);
+    itemRef.current = item;
+    const compositionKeysRequestedRef = useRef<Set<string>>(new Set());
 
     useEffect(() => {
         if (isFirstRender.current) { isFirstRender.current = false; return; }
@@ -70,6 +107,22 @@ const ItemWindow: React.FC<Props> = ({ item: initialItem, customization, isNew, 
         document.addEventListener('mousedown', handler);
         return () => document.removeEventListener('mousedown', handler);
     }, []);
+
+    const compositionKeysSignature = item instanceof Breakable ? item.compositions.map(c => c.referenceKey).join('|') : '';
+    useEffect(() => {
+        if (!(item instanceof Breakable)) return;
+        const missing = item.compositions.map(c => c.referenceKey).filter(k => !compositionKeysRequestedRef.current.has(k));
+        if (missing.length === 0) return;
+        missing.forEach(k => compositionKeysRequestedRef.current.add(k));
+        (async () => {
+            const fetched = await Promise.all(missing.map(k => dbFetch(`entries/${k}`)));
+            setCompositionCache(prev => {
+                const next = { ...prev };
+                missing.forEach((k, i) => { if (fetched[i] instanceof Item) next[k] = fetched[i]; });
+                return next;
+            });
+        })();
+    }, [compositionKeysSignature]);
 
     const scheduleAutosave = useCallback((updated: Item) => {
         if (!customization || isNew) return;
@@ -319,45 +372,52 @@ const ItemWindow: React.FC<Props> = ({ item: initialItem, customization, isNew, 
         -1
     );
 
+    const addComposition = async (key: string) => {
+        const entry = await dbFetch(`entries/${key}`);
+        if (!(entry instanceof Material)) return;
+        if (!(itemRef.current instanceof Breakable)) return;
+        itemRef.current.compositions.push({ referenceKey: entry.key, repairFactor: 1 });
+        setCompositionCache(prev => ({ ...prev, [entry.key]: entry }));
+        const updated = instantiateItem(itemRef.current.kind, itemRef.current);
+        setItem(updated);
+        scheduleAutosave(updated);
+    };
+    const removeComposition = (breakable: Breakable, i: number) => { breakable.compositions.splice(i, 1); update(); };
+    const setRepairFactor = (breakable: Breakable, i: number, value: number) => { breakable.compositions[i].repairFactor = Math.max(0, value); update(); };
+
     const CompositionsContainer = (breakable: Breakable) => {
         if (!customization && breakable.compositions.length === 0) return null;
         return (
-            <div className={styles.compositionsSection}>
+            <div>
                 <div className={styles.sectionLabel}>{t({ text: 'compositions', language, mode: 'UPPERCASE' })}</div>
-                <div className={styles.compositionList}>
-                    {breakable.compositions.map((comp, i) => (
-                        <div key={i} className={styles.compositionCard}>
-                            <span className={styles.compositionRef}>{compositionNames[comp.referenceKey] ?? comp.referenceKey}</span>
-                            {customization ? (
-                                <div className={styles.fieldValueControls}>
-                                    <button onClick={() => { breakable.compositions[i].repairFactor = Math.max(0, breakable.compositions[i].repairFactor - 1); update(); }}>−</button>
-                                    <span>{comp.repairFactor}</span>
-                                    <button onClick={() => { breakable.compositions[i].repairFactor++; update(); }}>+</button>
+                <div className={styles.recipeSlotRow}>
+                    {breakable.compositions.map((comp, i) => {
+                        const ref = compositionCache[comp.referenceKey];
+                        return (
+                            <div className={styles.recipeSlotWrapper} key={i}>
+                                <div className={styles.recipeSlotCell}>
+                                    <img className={styles.recipeSlotImage} src={getImageUrl(ref?.image ?? null, 'ITEM')} alt={ref?.name || ''} draggable={false} />
+                                    {customization && (
+                                        <button className={styles.recipeSlotRemove} onClick={() => removeComposition(breakable, i)}>×</button>
+                                    )}
                                 </div>
-                            ) : (
-                                <span className={styles.compositionValue}>{comp.repairFactor}</span>
-                            )}
-                            {customization && <button className={styles.compositionRemove} onClick={() => { breakable.compositions.splice(i, 1); update(); }}>×</button>}
-                        </div>
-                    ))}
+                                <div className={styles.recipeSlotName}>{ref?.name ?? comp.referenceKey}</div>
+                                {customization ? (
+                                    <div className={`${styles.fieldValueControls} ${styles.compositionRepairFactor}`}>
+                                        <button onClick={() => setRepairFactor(breakable, i, comp.repairFactor - 1)}>&lt;</button>
+                                        <span>{comp.repairFactor}</span>
+                                        <button onClick={() => setRepairFactor(breakable, i, comp.repairFactor + 1)}>&gt;</button>
+                                    </div>
+                                ) : (
+                                    <div className={styles.fieldValueDisplay}>{`< ${comp.repairFactor} >`}</div>
+                                )}
+                            </div>
+                        );
+                    })}
+                    {customization && (
+                        <AddCompositionSlot onAdd={addComposition} searchPlaceholder={t({ text: 'search-material', language, mode: 'PLAIN_FIRST_UPPER' })} />
+                    )}
                 </div>
-                {customization && (
-                    <div className={styles.compositionAddWrapper}>
-                        <button className={styles.compositionAddBtn} onClick={() => setCompositionSearchOpen(true)}>+</button>
-                        {compositionSearchOpen && (
-                            <FloatingSearch
-                                categories={['ITEM']}
-                                onSelect={result => {
-                                    breakable.compositions.push({ referenceKey: result.key, repairFactor: 1 });
-                                    setCompositionNames(prev => ({ ...prev, [result.key]: result.name }));
-                                    update();
-                                }}
-                                onClose={() => setCompositionSearchOpen(false)}
-                                placeholder={t({ text: 'search-material', language, mode: 'PLAIN_FIRST_UPPER' })}
-                            />
-                        )}
-                    </div>
-                )}
             </div>
         );
     };

@@ -664,88 +664,6 @@
 }
 
 
-.compositionsSection {
-    display: flex;
-    flex-direction: column;
-}
-
-.compositionList {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    max-height: calc(2 * (36px + 4px));
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--fill-color-very-light) transparent;
-    padding-right: 2px;
-}
-
-.compositionCard {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 10px;
-    border: 1px solid var(--fill-color-light);
-    background: var(--fill-color-regular);
-    min-height: 36px;
-    flex-shrink: 0;
-    transition: border-color 0.15s;
-}
-.compositionCard:hover { border-color: var(--fill-color-very-light); }
-
-.compositionRef {
-    font-family: 'Crimson Text', serif;
-    font-size: 12px;
-    letter-spacing: 1px;
-    color: var(--stroke-color-regular);
-    flex: 1;
-    min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.compositionValue {
-    font-family: 'Crimson Text', serif;
-    font-size: 15px;
-    color: var(--stroke-color-high);
-    min-width: 20px;
-    text-align: center;
-}
-
-.compositionRemove {
-    background: none;
-    border: none;
-    color: var(--stroke-color-low);
-    font-size: 14px;
-    cursor: pointer;
-    line-height: 1;
-    transition: color 0.1s;
-}
-.compositionRemove:hover { color: var(--red-color-light); }
-
-.compositionAddWrapper {
-    position: relative;
-    align-self: flex-start;
-    margin-top: 6px;
-}
-
-.compositionAddBtn {
-    background: none;
-    border: 1px dashed var(--fill-color-very-light);
-    color: var(--stroke-color-low);
-    font-size: 16px;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: border-color 0.15s, color 0.15s;
-}
-.compositionAddBtn:hover { border-color: var(--accent-color); color: var(--accent-color); }
-
-
 .modifiersSection {
     display: flex;
     flex-direction: column;
@@ -1263,10 +1181,28 @@
     margin-bottom: 20px;
 }
 
+.compositionRepairFactor {
+    gap: 4px;
+}
+
 .catalogueCompetenceRow {
     display: flex;
     align-items: center;
     gap: 16px;
     margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.dropRowsList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.dropRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
     flex-wrap: wrap;
 }

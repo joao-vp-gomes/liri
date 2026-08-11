@@ -862,5 +862,49 @@
     "recipes": {
         "en": "recipes",
         "pt": "receitas"
+    },
+    "constellation": {
+        "en": "constellation",
+        "pt": "constelação"
+    },
+    "actions": {
+        "en": "actions",
+        "pt": "ações"
+    },
+    "action": {
+        "en": "action",
+        "pt": "ação"
+    },
+    "drops": {
+        "en": "drops",
+        "pt": "drops"
+    },
+    "drop-batch": {
+        "en": "drop batch",
+        "pt": "lote de drops"
+    },
+    "max-health": {
+        "en": "max health",
+        "pt": "vida máxima"
+    },
+    "chance": {
+        "en": "chance",
+        "pt": "chance"
+    },
+    "min-drop-amount": {
+        "en": "min amount",
+        "pt": "quantidade mínima"
+    },
+    "max-drop-amount": {
+        "en": "max amount",
+        "pt": "quantidade máxima"
+    },
+    "multiple": {
+        "en": "multiple",
+        "pt": "múltiplo"
+    },
+    "unique": {
+        "en": "unique",
+        "pt": "único"
     }
 }
